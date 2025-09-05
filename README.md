@@ -8,7 +8,7 @@
 - Email: **news24x7wabsit@gmail.com**
 
 **News 24x7** is built as an educational and experimental project. The idea is to give users an experience similar to a real-world news portal – where they can explore, engage, and interact with the latest stories.
-##Key Features
+## Key Features
 - **Bookmark News:**Save stories and read them later.
 - **Follow & Like:**– Stay connected with your favorite topics and show your support.
 - **Topics Following:**-– Personalize your news feed by choosing the categories you care about most.
