@@ -9,7 +9,7 @@
 
 **News 24x7** is built as an educational and experimental project. The idea is to give users an experience similar to a real-world news portal – where they can explore, engage, and interact with the latest stories.
 ## Key Features
-- **Bookmark News:**Save stories and read them later.
+- **Bookmark News:** Save stories and read them later.
 - **Follow & Like:**– Stay connected with your favorite topics and show your support.
 - **Topics Following:**-– Personalize your news feed by choosing the categories you care about most.
 - **Language Options:** – Access news in Hindi and Gujarati for wider reach.
@@ -17,7 +17,7 @@
 - **Comments on News:** – Share your opinions and join discussions with other readers.
 - **Report News:**– Help improve the platform by reporting false or inappropriate content.
 
-  ##Why News 24x7?
+  ## Why News 24x7?
   - **📰 Simple & Clean Design:**– Easy to navigate for all users.
   -  **Accessible in Multiple Languages**– Reaching audiences in both Hindi and Gujarati.
   -  **Interactive Experience**– Go beyond reading – bookmark, follow, like, and comment.
