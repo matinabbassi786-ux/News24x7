@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+    Messages
+{% endblock title %}
+
+
+{% block body %}
+{% include 'staff/nav.html' with userdb=userdb %}
+<div class="container-fluid">
+<div class="row justify-content-center">
+<div class="col-6">
+
+    <table class="table mt-5 table-bordered">
+        <thead>
+            <tr>
+                <th colspan="3" class="bg-dark text-white">
+                    Messages
+                </th>
+            </tr>
+            <tr>
+                <th class="col-2 text-center">Tmage</th>
+                <th class="text-center" >Topic</th>
+                <th class="col-3 text-center ">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for x in meaxax  %}
+                <tr>
+                    <td>
+                        <a href="/panelstaff/uservews/{{x.user}}/{{x.user.id}}">
+                        <img class="w-100" src="/media/{{x.user.picture}}" alt="">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/panelstaff/uservews/{{x.user}}/{{x.user.id}}">
+                            {{x.Txt}}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/panelstaff/uservews/{{x.user}}/{{x.user.id}}">
+                            {{x.date}}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+                
+        </tbody>
+    </table>
+
+</div>
+</div>
+</div>
+{% endblock body %}

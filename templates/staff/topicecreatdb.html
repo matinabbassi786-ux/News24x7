@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+    Create Topic
+{% endblock title %}
+{% block body %}
+{% include 'staff/nav.html' with userdb=userdb %}
+
+<div class="container-fluid">
+    <form action="" method="post">
+        {% csrf_token %}
+<div class="row justify-content-center">
+    <div class="col-6 shadow-lg border rounded mt-5 p-3 ">
+        <div class="text-end" style="font-size: 32px;">
+                   
+                    <a href="/panelstaff/">
+                        <i class="bi bi-x-lg"></i>
+                    </a>
+                </div>
+            <label for="topic">Topic</label>
+            <input name="topic" id="topic" type="text" placeholder="Entert har..." maxlength="20" required class="form-control">
+            <div>
+
+                <button type="submit" class=" btn mt-3 btn-dark">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+
+{% endblock body %}
+
+

@@ -1,0 +1,75 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+    Staff List
+{% endblock title %}
+
+
+{% block body %}
+{% include 'staff/nav.html' with userdb=userdb %}
+
+<div class="container-fluid">
+<div class="row justify-content-evenly">
+    <div class="col-10  mt-5">
+        <input id="myInput"  type="text" class="form-control  rounded-0 rounded-top-2 " placeholder="Search..">
+        <table class="table table-bordered  table-hover table-striped  w-100">
+            <thead>
+                <tr>
+                    <th colspan="10" class="bg-dark text-white">
+                        Staff List
+                    </th>
+                </tr>
+                <tr>
+                    <th >ID</th>
+                    <th >Image</th>
+                    <th>Name</th>
+                    <th>position</th>
+                    <th>Date Of Birth</th>
+                    <th>Phone Number</th>
+                    <th>ZipCode</th>
+                    <th>One Addresse</th>
+                    <th>Two Address</th>
+                    <th>Join Date</th>
+                    <th>Leave Date</th>
+                </tr>
+            </thead>
+            <tbody  id="myTable" >
+                
+                {% for x in Staffall %}
+                    <tr>
+                        <td>{{x.id}} </td>
+                        <td> <img src="/media/{{x.picture}}" class="" alt="" style="aspect-ratio: 1/1; object-fit: cover; width: 50px;"> </td>
+                        <td> <a href="/panelstaff/uservews/{{x}}/{{x.id}}"> {{x.staff_name}} </a>      </td>
+                        <td> {{x.position}}         </td>
+                        <td> {{x.DateOfBirth}}      </td>
+                        <td> {{x.PhoneNumber}}      </td>
+                        <td> {{x.ZipCode}}          </td>
+                        <td> {{x.OneAddress}}       </td>
+                        <td> {{x.TwoAddress}}       </td>
+                        <td> {{x.JoinDate}}         </td>
+                        <td> {{x.LeaveDate}}        </td>
+                    </tr>
+                {% endfor %}
+                    
+            </tbody>
+            
+        </table>
+    </div>
+</div>
+</div>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+<div>
+    <div class="p-5 m-5 "></div>
+    <div class="p-5 m-5 "></div>
+</div>
+{% endblock body %}

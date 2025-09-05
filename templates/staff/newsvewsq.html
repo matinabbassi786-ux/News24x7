@@ -1,0 +1,72 @@
+ {% extends 'main.html' %}
+
+
+{% block title %}
+    {{newsdb.NewsTitle}}
+{% endblock title %}
+{% block body %}
+{% include 'staff/nav.html' with userdb=userdb %}
+<div class="container-fluid">
+<div class="row justify-content-center">
+<div class="col-6 border rounded mt-5 p-3  mb-5">
+
+    Topic: <br><b>{{newsdb.Topic}} </b> <br> <hr>
+    id: <br><b>{{newsdb.id}} </b> <br> <hr>
+    Journalists Name: <br><b>
+    <a href="/panelstaff/uservews/{{newsdb.Journalists}}/{{newsdb.Journalists.id}}">
+        {{newsdb.Journalists}}
+    </a>    
+    
+    </b> <br> <hr>
+    
+    Writers Name:     <br><b>
+        <a href="/panelstaff/uservews/{{newsdb.Writers}}/{{newsdb.Writers.id}}">
+            {{newsdb.Writers}}
+        </a>
+         </b>         
+   
+    {% if newsdb.WritersPermission == unknown %}
+    <br> <a href="/panelstaff/Writersrandom/{{newsdb.id}}" class="btn" >Random</a> <a href="/panelstaff/Writerssomeone/{{newsdb.id}}" class="btn">Some one</a> 
+        
+    {% endif %}
+        
+     <hr>
+    
+    Editors Name:     <br><b>
+    <a href="/panelstaff/uservews/{{newsdb.Editors}}/{{newsdb.Editors.id}}  ">
+        {{newsdb.Editors}} 
+    </a>    
+    
+    </b>         <br>
+    
+    {% if newsdb.WritersPermission == True and newsdb.EditorsPermission == unknown  %}
+        
+    
+    <a href="/panelstaff/editorsrandom/{{newsdb.id}}" class="btn ">Random</a>
+    
+    <a href="/panelstaff/editorsomeone/{{newsdb.id}}" class="btn">Some one</a>
+    {% endif %}
+       <hr>
+Titile: <br><b>{{newsdb.NewsTitle}}</b> <hr>
+text:
+<br>
+{{newsdb.Txt|safe}}
+<br><img src="/media/{{newsdb.Image}}" width="250" alt="">
+<hr>
+<br> <video src="/media/{{newsdb.Video}}" controls width="250"></video>
+
+{% for q in mutple  %}
+    <br><img src="/media/{{q.image}}" width="250" alt="" class="mt-2"><hr>
+    
+{% if q.video != "" %}
+    
+
+<br> <video src="/media/{{q.video}}" controls width="250" class="mt-2"></video><hr>
+{% endif %}
+{% endfor %}
+    
+</div>
+<div class="p-5 m-5"></div>
+</div>
+</div>
+{% endblock body %}

@@ -1,0 +1,133 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+Statistics
+{% endblock title %}
+    
+
+{% block body %}
+
+{% include 'staff/nav.html' with userdb=userdb %}
+<hr style="width: 365rem;">
+<h1 class="ps-5">
+    You All Database Statistics
+</h1>
+
+    <div class="p-5" style="width: 365rem;">
+        <canvas id="myChart1"  ></canvas>
+    </div>
+
+<div class="p-5 m-5"></div>
+
+ <div id="my-data-container">
+        {{ dbdate1|json_script:"dbdate1" }}
+        {{ dbnewsn1|json_script:"dbnewsn1" }}
+    </div>
+
+       
+
+<script>
+var xValues = [];    
+var yValues = [];
+const myListElement = document.getElementById('dbdate1');
+        const jsArray = JSON.parse(myListElement.textContent);
+        console.log(jsArray); 
+        jsArray.forEach(item => {
+            xValues.push(item)
+        });
+
+const myListElement2 = document.getElementById('dbnewsn1');
+        const jsArray2 = JSON.parse(myListElement2.textContent);
+        console.log(jsArray2); 
+        jsArray2.forEach(item => {
+            yValues.push(item)
+        });
+    
+
+var barColors = [ 'rgba(255, 99, 132 , 0.6)','rgba(255, 159, 64, 0.6)','rgba(255, 205, 86, 0.6)','rgba(75, 192, 192, 0.6)','rgba(54, 162, 235, 0.6)','rgba(153, 102, 255, 0.6)','rgba(201, 203, 207, 0.6)'];
+var bordercolorq =[ 'rgb(255, 99, 132)','rgb(255, 159, 64)','rgb(255, 205, 86)','rgb(75, 192, 192)','rgb(54, 162, 235)','rgb(153, 102, 255)','rgb(201, 203, 207)']
+    new Chart("myChart1", {
+  type: 'bar',
+  data: {
+    labels: xValues,
+    datasets: [{
+      label:'You All Database  ',   
+      backgroundColor: barColors,
+      borderColor:bordercolorq,
+      data: yValues
+    },
+    
+],
+
+
+    },
+   options: {
+
+    responsive: true,
+            maintainAspectRatio: true
+  },
+  
+});
+</script>
+<!--  -->
+<hr style="width: 365rem;">
+<div class="container-fluid p-2  ">
+    <h1 class="ps-5">
+    You All submit  Statistics
+</h1>
+    <div class="p-5" style="width: 365rem;">
+        <canvas id="myChart2"></canvas>
+    </div>
+</div>
+<div class="p-5 m-5"></div>
+
+ <div id="my-data-container">
+        {{ dbdate2|json_script:"dbdate2" }}
+        {{ dbnewsn2|json_script:"dbnewsn2" }}
+    </div>
+
+
+<script>
+    var xValues = [];    
+var yValues = [];
+const myListElement3 = document.getElementById('dbdate2');
+        const jsArray3 = JSON.parse(myListElement3.textContent);
+        jsArray3.forEach(item => {
+            xValues.push(item)
+        });
+
+const myListElement4 = document.getElementById('dbnewsn2');
+        const jsArray4 = JSON.parse(myListElement4.textContent);
+        console.log(jsArray4); 
+        jsArray4.forEach(item => {
+            yValues.push(item)
+        });
+
+    var barColors = [ 'rgba(255, 99, 132 , 0.6)','rgba(255, 159, 64, 0.6)','rgba(255, 205, 86, 0.6)','rgba(75, 192, 192, 0.6)','rgba(54, 162, 235, 0.6)','rgba(153, 102, 255, 0.6)','rgba(201, 203, 207, 0.6)'];
+var bordercolorq =[ 'rgb(255, 99, 132)','rgb(255, 159, 64)','rgb(255, 205, 86)','rgb(75, 192, 192)','rgb(54, 162, 235)','rgb(153, 102, 255)','rgb(201, 203, 207)']
+    new Chart("myChart2", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      label:'You All Database submit  ',   
+      backgroundColor: barColors,
+      borderColor:bordercolorq,
+      data: yValues
+    },]
+
+    
+  },
+ 
+});
+</script>
+<!-- <hr style="width: 365rem;">
+<h1 class="ps-5">
+     Approval Managers  Statistics
+</h1> -->
+
+<div class="m-5 p-5"></div>
+<div class="m-5 p-5"></div>
+{% endblock body %}
+   

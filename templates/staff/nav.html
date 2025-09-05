@@ -1,0 +1,37 @@
+
+<!-- SunEditor CSS -->
+<link href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css" rel="stylesheet">
+
+<!-- SunEditor JS -->
+<script src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
+
+
+<div class="container-fluid bg-dark " style="position: fixed; bottom: 0%; z-index: 25;">
+<div class="row justify-content-around pt-2 pb-2">
+
+    <a href="/" class="w-auto  m-2 text-center btn btn-outline-light text-break text-wrap"><i class="bi bi-house-door-fill"></i><br><span style="font-size: 10px;">Home</span></a>
+    <a href="/panelstaff/" class="w-auto  m-2 text-center btn btn-outline-light text-break text-wrap"><i class="bi bi-window-fullscreen"></i><br><span style="font-size: 10px;">Panel</span></a>
+    
+    <a href="/panelstaff/data/list/" class="w-auto  m-2 text-center btn btn-outline-light text-break text-wrap"><i class="bi bi-database-fill"></i><br><span style="font-size: 10px;">See Data All</span></a>
+   
+    <a href="{% url 'creatdbtbale' %}" class="w-auto  m-2 text-center btn btn-outline-light text-break text-wrap"><i class="bi bi-database-fill-add"></i><br><span style="font-size: 10px;">Add Data</span></a>
+   
+    <a href="{% url 'Statistics' %}" class="w-auto  m-2 text-center btn btn-outline-light text-break text-wrap"><i class="bi bi-bar-chart-line-fill"></i><br><span style="font-size: 10px;">Statistics</span></a>
+    
+    {% if userdb.position in "Admin,CEO,HR,Manager"  %}
+    <!-- <a href="{% url 'Staffadd' %}" class="w-auto  m-2 text-center btn btn-outline-light text-break text-wrap"><i class="bi bi-person-fill-add"></i><br><span style="font-size: 10px;">Add Staff </span></a> -->
+    <a href="{% url 'StaffAll' %}" class="w-auto  m-2 text-center btn btn-outline-light text-break text-wrap"><i class="bi bi-person-lines-fill"></i><br><span style="font-size: 10px;">See Staff All </span></a>
+    <a href="/api/" class="w-auto  m-2 text-center btn btn-outline-light text-break text-wrap">
+    <span style="font-size: 16px;">
+        <i class="bi bi-hdd-network-fill"></i>
+    </span>
+    <br>
+    API 
+</a>
+    {% endif %}
+
+    <a href="{% url 'History' %}" class="w-auto  m-2 text-center btn btn-outline-light text-break text-wrap"><i class="bi bi-clock-history"></i><br><span style="font-size: 10px;">See History </span></a>
+    <a href="{% url 'Messages' %}" class="w-auto  m-2 text-center btn btn-outline-light text-break text-wrap"><i class="bi bi-chat-left-dots-fill"></i><br><span style="font-size: 10px;">Messages</span></a>
+
+</div>
+</div>

@@ -1,0 +1,76 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+
+{% if yas == 1 %}
+Writers
+{% else %}
+Editors 
+{% endif %}
+
+{% endblock title %}
+
+
+{% block body %}
+{% include 'staff/nav.html' with userdb=userdb %}
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+<div class="container-fluid">
+<div class="row justify-content-center">
+<div class="border rounded col-6 p-3 mt-5">
+    <table class="table">
+       
+        <thead>
+            <tr>
+                <td>
+                    <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                </td>
+            </tr>
+            <tr>
+                <th class="bg-dark text-white">
+                    Name
+                </th>
+            </tr>
+        </thead>
+        <tbody  id="myTable">
+            
+            {% for x in userdball  %}
+                <tr>
+                    <td>
+                        
+                        {% if yas == 1  %}
+                            
+                        
+                        <a href="/panelstaff/somewriter/{{Newsdb.id}}/{{x.staff_name}}/{{x.id}}">
+                            {{x.staff_name}}
+                        </a>
+                        {% endif %}
+                        
+                        {% if yas == 0 %}
+                               
+                        <a href="/panelstaff/editorsome/{{Newsdb.id}}/{{x.staff_name}}/{{x.id}}">
+                            {{x.staff_name}}
+                        </a>
+                        {% endif %}
+                            
+                    </td>
+                </tr>
+            {% endfor %}
+                
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+
+{% endblock body %}
+    

@@ -1,0 +1,74 @@
+{% extends 'main.html' %}
+
+
+{% block title %}  Staff CreatDate 2
+{% endblock title %}
+{% block body %}
+{% include 'staff/nav.html' with userdb=userdb %}
+<form action="" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+    <div class="col-1 p-5 "></div>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-6 border border-5 rounded p-2" style="border-style: dotted !important;">
+                <b>
+                    Ganders: 
+                    
+                </b>
+                <br>
+                <label class="form-check-label" for="Male">Male: </label><input   checked  class="form-check-input"  value="Male" type="radio" name="Ganders" id="Male"> <br>
+                <label class="form-check-label" for="Female">Female: </label><input   class="form-check-input"  value="Female" type="radio" name="Ganders" id="Female"> <br>
+                <label class="form-check-label" for="Other">Other: </label><input   class="form-check-input"  value="Other" type="radio" name="Ganders" id="Other"> <br>
+                <div class="col-12 sd8921">
+                    {{forms.as_div}}
+                </div>
+                <div class="col-12 mt-3">
+                    <center>
+                        <button class="btn btn-primary" type="submit"> <i class="bi bi-cloud-arrow-up-fill"></i> Submit</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+    
+    <script>
+        $("#id_user").val('{{user.id}}'); 
+        $("#id_user").hide()
+        $("textarea").addClass("form-control");
+        $("#id_ZipCode").addClass("form-control");
+        $("#id_PhoneNumber").addClass("form-control");
+        $("#id_staff_name").addClass("form-control");
+$("#id_DateOfBirth").addClass("form-control");
+$("select").addClass("form-select");
+$('#id_DateOfBirth').attr('type', 'date');
+$('#id_JoinDate').attr('type', 'date');
+$('#id_LeaveDate').attr('type', 'date');
+$('#id_picture').addClass("form-control");
+$('#id_JoinDate').addClass("form-control");
+$('#id_LeaveDate').addClass("form-control");
+$('label').addClass("fw-bold");
+$("#id_staff_name").val("{{user}}");
+
+</script>
+<style>
+    select{
+        width: auto;
+    }
+    select > * {
+  width: 200px !important;  /* Sets a fixed width */
+text-wrap: wrap !important;
+}
+.sd8921 > div:nth-child(1){
+    display: none;
+}
+    .sd8921 > div{
+        padding-top: 20px;
+        padding-bottom: 20px;
+        border-bottom-style: dotted !important;
+        border-bottom: solid gray ;
+    }
+</style>
+<div class="col-1 m-5 p-5"></div>
+{% endblock body %}

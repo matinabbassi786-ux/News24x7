@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+
+{{multiple.news}}
+
+{% endblock title %}
+{% block body %}
+{% include 'staff/nav.html' with userdb=userdb %}
+<div class="container-fluid  pt-5">
+    <div class="row justify-content-center  ">
+        <div class="col-5 border rounded p-2 shadow-lg ">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{multipleNewsImageAndVideodbformdb.as_div}}
+                <button type="submit" class="btn btn-primary mt-3 mb-3 ">
+Seva
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+        $(document).ready(function(){
+        $("#id_Image").addClass('form-control');
+        $("#id_Video").addClass('form-control');
+    })
+</script>
+{% endblock body %}

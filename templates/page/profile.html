@@ -1,0 +1,126 @@
+{% extends 'main.html' %}
+
+{% block title %}
+    profile
+{% endblock title %}
+
+
+
+{% block body %}
+<style>
+.video-background {
+  position: fixed;
+  object-fit: fill;
+  margin: 0;
+  z-index: -99;
+}
+.glass-effect {
+  background-color: rgba(255, 255, 255, 0.15);   
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); 
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(243, 229, 229, 0.1);
+  border-radius: 16px;
+}
+
+</style>
+<video class="video-background " src="/static/image/zero.mp4" autoplay loop muted ></video>
+<div class="container-fluid row pt-5 mb-3 justify-content-center">
+<div class="col-10 row justify-content-center">
+<div class="col-sm-8 glass-effect text-white ">
+    <div class="row justify-content-center">
+        <div class="col-12 text-end text-white">
+            <a href="/" class="text-white" style="font-size: 32px;">
+                <i class="bi bi-x-lg"></i>
+            </a>
+        </div>
+        <div class="col-12 pt-3 pb-3"> 
+            <center>
+                
+                {% if user.userinfo.picture != ""  %}
+                <img style="width: 250px; height: 250px; aspect-ratio: 1 / 1; "  src="/media/{{user.userinfo.picture}}" class="rounded-circle" alt=""> 
+                {% else %}
+                <img style="width: 250px; height: 250px; aspect-ratio: 1 / 1; "  src="/static/image/profile.webp" class="rounded-circle" alt=""> 
+                {% endif %}
+            </center>
+        </div>
+        <div class="col-12 text-white fs-5 text-break text-wrap  ">
+            Name: {{user.username}}  <br>
+            Email: {{user.email }} <br>
+            Ganders: {{user.userinfo.Ganders }} 
+            
+            {% if user.userinfo.Ganders == 'Male'  %}
+                <i class="bi bi-gender-male"></i>
+            {% endif %}
+            
+            {% if user.userinfo.Ganders == 'Female'  %}
+            <i class="bi bi-gender-female"></i>
+            {% endif %}
+            {% if user.userinfo.Ganders == 'Other'  %}
+   <i class="bi bi-gender-neuter"></i>         
+            {% endif %}
+                
+            <br>
+        </div>
+        <div class="col-12 pb-5 pt-5">
+            <div class=" justify-content-around row">
+<button style="width: fit-content;" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<i class="bi bi-pencil-fill"></i> Edit
+</button>
+                
+
+{% if user.is_staff %}
+
+<a href="/panelstaff/" class="bg-success text-white btn " style="width: fit-content;">
+    <i class="bi bi-layers-fill"></i> 
+    
+    Admin
+</a>
+
+{% endif %}
+                
+                    
+                <a href="{% url 'logout' %}" class="btn btn-danger" style="width: fit-content;"><i class="bi bi-box-arrow-left"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<!-- Modal -->
+<div  style="background-color: rgba(0, 0, 0, 0.33);" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Profile Edit</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <script>
+            $(document).ready(function(){
+
+                $("#id_picture").hide()
+            })
+        </script>
+       <form action="" enctype="multipart/form-data" method="post">
+{% csrf_token %}
+<label style="border-style: dotted !important ; background-color: #0dcaf04e; font-size: 32px;  " for="{{dbform.picture.id_for_label }}" class=" w-100 border-3 border border-dark  text-center pt-5 pb-5">
+    <i class="bi bi-image"></i>
+</label> <br>
+
+<span class="d-none">
+    {{dbform.picture}}
+</span>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+</form>
+    </div>
+  </div>
+</div>
+{% endblock body %}
+    

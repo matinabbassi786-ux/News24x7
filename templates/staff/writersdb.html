@@ -1,0 +1,146 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+    Data List
+{% endblock title %}
+{% block body %}
+{% include 'staff/nav.html' with userdb=userdb %}
+
+<form  method="POST">
+  {% csrf_token %}
+<div class="container-fluid">
+<div class="row justify-content-center">
+    <div class="col-6">
+      <table class="table mt-5 mb-5">
+    <thead>
+           
+            <tr>
+              <th  colspan="3" class=" bg-dark text-white fs-4 "> You Submit </th>
+            </tr>
+            
+          </thead>
+          <tbody>
+            
+            {% for x in newsgbTrue|slice:":50:"  %}
+            <tr>
+              <td>  
+                <a href="/panelstaff/newsvewsqws/{{x.id}}/{{x.slug}}">
+                  {{x.NewsTitle  }}
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+            
+            <tr></tr>
+          </tbody>
+          
+        </table>
+      <!--  -->
+      <table class="table mt-5 mb-5">
+    <thead>
+            <tr>
+                <th colspan="1">
+                <select name="action2" class="form-select" aria-label="Default select example">
+                    <option selected>Action Select </option>
+                    <option value="3">submit</option>
+                    <option value="2">No  </option>
+                </select>
+              </th>
+              <th>
+                <input type="submit" class="btn">
+              </th>
+            </tr>
+            <tr>
+              <th  colspan="3" class=" bg-dark text-white fs-4 "><input type="checkbox"  id="selectAllCheckbox2" > You Work</th>
+            </tr>
+            
+          </thead>
+          <tbody>
+            
+            {% for x in newsgbss  %}
+            <tr>
+              <td> 
+                <input type="checkbox" name="Rejected1" value="{{x.id}}" class="individualCheckbox2">
+                <a href="/panelstaff/newsvewsqws/{{x.id}}/{{x.slug}}"> {{x.NewsTitle  }} </a>
+                </td>
+                <td class="text-center"> <a href="/panelstaff/editnews/{{x.slug}}/{{x.id}}/"><i class="bi bi-pencil-square"></i></a></td>
+            </tr>
+            {% endfor %}
+            
+            <tr></tr>
+          </tbody>
+          
+        </table>
+ 
+      <!--  -->
+  <table class="table mt-5 mb-5">
+    <thead>
+            <tr>
+                <th colspan="1">
+                <select name="action" class="form-select" aria-label="Default select example">
+                    <option selected>Action Select </option>
+                    <option value="1">Yas </option>
+                    <option value="2">No  </option>
+                </select>
+              </th>
+              <th>
+                <input type="submit" class="btn">
+              </th>
+            </tr>
+            <tr>
+              <th  colspan="3" class=" bg-dark text-white fs-4 "><input type="checkbox"  id="selectAllCheckbox1" > Take You Request</th>
+            </tr>
+            
+          </thead>
+          <tbody>
+            
+            {% for x in newsgb  %}
+            <tr>
+              <td> <input type="checkbox" name="Rejected" value="{{x.id}}" class="individualCheckbox1">
+              <a href="/panelstaff/newsvewsqws/{{x.id}}/{{x.slug}}">
+                {{x.NewsTitle  }}
+              </a>
+               </td>
+            </tr>
+            {% endfor %}
+            
+            <tr></tr>
+          </tbody>
+          
+        </table>
+        
+        <!--  -->
+        
+          
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+     $(document).ready(function() {
+        $('#selectAllCheckbox1').on('change', function() {
+            var isChecked = $(this).prop('checked');
+            $('.individualCheckbox1').prop('checked', isChecked);
+        });
+        $('.individualCheckbox1').on('change', function() {
+            var allChecked = $('.individualCheckbox1:checked').length === $('.individualCheckbox').length;
+            $('#selectAllCheckbox1').prop('checked', allChecked);
+        });
+    });
+</script>
+<script>
+     $(document).ready(function() {
+        $('#selectAllCheckbox2').on('change', function() {
+            var isChecked = $(this).prop('checked');
+            $('.individualCheckbox2').prop('checked', isChecked);
+        });
+        $('.individualCheckbox2').on('change', function() {
+            var allChecked = $('.individualCheckbox2:checked').length === $('.individualCheckbox').length;
+            $('#selectAllCheckbox2').prop('checked', allChecked);
+        });
+    });
+</script>
+{% endblock body %}
+

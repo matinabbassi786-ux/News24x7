@@ -1,0 +1,24 @@
+ 
+ <div class="border-bottom ps-1 mt-2 mb-2 ">
+                <div class="row">
+                    <div class="col-1 pb-2">
+<a href="">
+    
+    {% if img != "" %}
+    <img class="w-100 rounded-circle  " src="/media/{{img}}" alt="">
+    {% else %}
+    <img class="w-100 rounded-circle " src="/static/image/profile.webp" alt="">
+    {% endif %}
+        
+</a>
+</div>
+                    <div class="col-10 text-break text-wrap">
+<span class="" style="font-size: 12px; color: gray;">
+    @{{user}}
+</span>
+   
+<br>
+ {{txt}}
+                    </div>
+                </div>
+</div>

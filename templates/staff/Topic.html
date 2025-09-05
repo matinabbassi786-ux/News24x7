@@ -1,0 +1,9 @@
+ {% extends 'main.html' %}
+
+
+{% block title %}
+    {{newsdb.NewsTitle}}
+{% endblock title %}
+{% block body %}
+{% include 'staff/nav.html' with userdb=userdb %}
+{% endblock body %}

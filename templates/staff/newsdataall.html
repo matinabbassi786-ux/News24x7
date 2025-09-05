@@ -1,0 +1,244 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+News Data All
+{% endblock title %}
+
+
+{% block body %}    
+{% include 'staff/nav.html' %}
+
+<div class="mb-3  gap-2 align-items-center">
+  <label for="sortColumn" class="form-label mb-0 fw-bold">Sort by:</label>
+  <select id="sortColumn" class="form-select w-auto">
+    <option value="0">#</option>
+    <option value="1">Topic</option>
+    <option value="2">Journalists</option>
+    <option value="4">Writers</option>
+    <option value="6">Editors</option>
+    <option value="8">Title</option>
+    <option value="9">Txt</option>
+  </select>
+  <button class="btn btn-primary" onclick="sortTable()">Sort</button>
+</div>
+
+<button value="1" onclick="sortTable()" >1</button>
+
+<table class="table table-hover "  id="sortableTable" >
+    <thead>
+    <tr class="table-primary fw-bolder ">
+
+            <td>
+            <button 
+            style="background-color: rgba(0, 0, 0, 0);" 
+            class="fw-bolder border-0" value="0" onclick="sortTable()" >
+            #
+            </button>
+            </td>
+            <td>
+            <button 
+            style="background-color: rgba(0, 0, 0, 0);" 
+            class="fw-bolder border-0" value="1" onclick="sortTable()" >
+            Topic
+            </button>
+            </td>
+            <td>
+            <button 
+            style="background-color: rgba(0, 0, 0, 0);" 
+            class="fw-bolder border-0" value="2" onclick="sortTable()" >
+            Journalists
+            </button>
+            </td>
+            <td>
+            <button 
+            style="background-color: rgba(0, 0, 0, 0);" 
+            class="fw-bolder border-0" value="3" onclick="sortTable()" >
+            Journalists <br> Permission
+            </button>
+               
+            <td>Writers</td>
+        <td>Writers <br> Permission </td>
+        <td>Editors </td>
+        <td>Editors <br> Permission </td>
+        <td>Title</td>
+        <td>Txt</td>
+        <td>Image</td>
+        <td>Video</td>
+        <td>Managers <br>
+            Permission</td>
+            <td>Edit</td>
+            <td>Eelete</td>
+        </tr>
+    </thead>
+    
+    {% for q in newsgb  %}
+    <tr>
+        <td class="fw-bold"> {{q.id}} </td>
+        <td>{{q.Topic}} </td>
+        <td> {{q.Journalists}} </td>
+        <td class="text-center">
+            {% if q.JournalistsPermission == None %}
+            <span class="text-break">
+                <i class="bi bi-dash-circle-fill"></i>
+            </span>
+            {% endif %}
+            {% if q.JournalistsPermission == True %}
+            <span class="text-success">
+                <i class="bi bi-check-circle-fill"></i>
+            </span>
+            {% endif %}
+            {% if q.JournalistsPermission == False %}
+            <span class="text-danger">
+                <i class="bi bi-x-circle-fill"></i>
+            </span>
+            {% endif %}
+            </td>
+            <td>
+                
+                {% if q.Writers == None %}
+                <span class="text-break">
+                <i class="bi bi-dash-circle-fill"></i>
+                </span> 
+                {% else %}
+                {{q.Writers}}
+                {% endif %}
+            </td>
+            <!--  -->
+         <td class="text-center" >
+            {% if q.WritersPermission == None %}
+            <span class="text-break">
+                <i class="bi bi-dash-circle-fill"></i>
+            </span>
+            {% endif %}
+            {% if q.WritersPermission == True %}
+            <span class="text-success">
+                <i class="bi bi-check-circle-fill"></i>
+            </span>
+            {% endif %}
+            {% if q.WritersPermission == False %}
+            <span class="text-danger">
+                <i class="bi bi-x-circle-fill"></i>
+            </span>
+            {% endif %}
+            </td>
+            <td>
+                 {% if q.Editors == None %}
+                <span class="text-break">
+                <i class="bi bi-dash-circle-fill"></i>
+                </span> 
+                {% else %}
+                {{q.Editors}}
+                {% endif %}
+            </td>
+            <!--  -->
+            <td class="text-center">
+            {% if q.EditorsPermission == None %}
+            <span class="text-break">
+                <i class="bi bi-dash-circle-fill"></i>
+            </span>
+            {% endif %}
+            {% if q.EditorsPermission == True %}
+            <span class="text-success">
+                <i class="bi bi-check-circle-fill"></i>
+            </span>
+            {% endif %}
+            {% if q.EditorsPermission == False %}
+            <span class="text-danger">
+                <i class="bi bi-x-circle-fill"></i>
+            </span>
+            {% endif %}
+            </td>
+            
+
+            <td>{{q.NewsTitle}}</td>
+            <td>{{q.Txt|safe }}</td>
+            
+            <td>
+                <a
+  data-fancybox
+  data-src="/media/{{q.Image}}"
+ 
+>
+  <img src="/media/{{q.Image}}" width="200" height="150" alt="" />
+</a>
+</td>
+<td>
+
+    
+    {% if q.Video == '' %}
+         <span class="text-break">
+                <i class="bi bi-dash-circle-fill"></i>
+            </span>
+    {% endif %}
+        
+
+<a
+data-fancybox
+data-src="/media/{{q.Video}}"
+data-width="640" data-height="360"
+>
+<video style="z-index: 2;" src="/media/{{q.Video}}" width="200" height="150"  ></video>
+</a>
+</td>
+
+<td class="text-center">
+    {% if q.ManagersPermission == None %}
+    <span class="text-dark">
+        <i class="bi bi-dash-circle-fill"></i>
+    </span>
+    {% endif %}
+    {% if q.ManagersPermission == False %}
+    <span class="text-danger">
+        <i class="bi bi-x-circle-fill"></i>
+    </span>
+    {% endif %}
+    {% if q.ManagersPermission == True %}
+    <span class="text-success">
+                <i class="bi bi-check-circle-fill"></i>
+            </span>
+    {% endif %}
+</td>
+<td class="text-center"><a href="" class="text-primary"><i class="bi bi-pencil-fill"></i></a></td>
+<td class="text-center"><a href="" class="text-danger"><i class="bi bi-trash3-fill"></i></a></td>
+        
+    </tr>
+    {% endfor %}
+</table>
+
+
+<div class="p-5  m-5"></div>
+<script>
+  let sortDirections = {};
+
+  function sortTable() {
+    const table = document.getElementById("sortableTable");
+    const tbody = table.tBodies[0];
+    const rows = Array.from(tbody.rows);
+    const colIndex = parseInt(document.getElementById("sortColumn").value);
+    sortDirections[colIndex] = !sortDirections[colIndex];
+
+    const isNumeric = rows.every(row => {
+      const text = row.cells[colIndex].innerText.trim();
+      return !isNaN(text) && text !== "";
+    });
+
+    rows.sort((a, b) => {
+      let aText = a.cells[colIndex].innerText.trim();
+      let bText = b.cells[colIndex].innerText.trim();
+
+      if (isNumeric) {
+        aText = Number(aText);
+        bText = Number(bText);
+      }
+
+      return sortDirections[colIndex]
+        ? aText > bText ? 1 : -1
+        : aText < bText ? 1 : -1;
+    });
+    rows.forEach(row => tbody.appendChild(row));
+  }
+</script>
+
+{% endblock body %}
+    

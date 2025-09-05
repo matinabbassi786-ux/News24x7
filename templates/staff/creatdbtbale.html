@@ -1,0 +1,78 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+    Create DB
+{% endblock title %}
+{% block body %}
+{% include 'staff/nav.html' with userdb=userdb %}
+
+<div class="container-fluid">
+<div class="row justify-content-center ">
+<div class="col-6">
+<!--  -->
+<table class="table mt-5 table-bordered ">
+    <thead>
+        <tr >
+            <th colspan="2" class="bg-dark text-white text-center ">
+                Create DB <i class="bi bi-database-fill-add"></i>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th class="text-center" style="width: 10%;">
+                Create
+            </th>
+        </tr>
+    </thead>
+    <tr>
+        <td>
+            <a href="{% url 'Newsdbcreats' %}">
+                News 
+            </a>
+        </td>
+        <td class="text-center">
+            <a href="{% url 'Newsdbcreats' %}"  >
+                <i class="bi bi-database-fill-add"></i>
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="{% url 'topicecreatdb' %}">
+                Topic
+            </a>
+        </td>
+        <td class="text-center">
+            <a href="{% url 'topicecreatdb' %}">
+                 <i class="bi bi-database-fill-add"></i>
+            </a>
+        </td>
+    </tr>
+    
+    {% if userdb.position in 'Manager,Admin,CEO'  %}
+    <tr>
+        <td>
+            Create Staff
+        </td>
+        <td class="text-center">
+              <a href="{% url 'Staffcreate' %}">
+                 <i class="bi bi-database-fill-add"></i>
+            </a>
+
+        </td>
+    </tr> 
+    {% endif %}
+        
+ 
+    
+</table>
+<!--  -->
+</div>
+</div>
+</div>
+
+
+{% endblock body %}

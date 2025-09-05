@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+History
+{% endblock title %}
+    
+
+{% block body %}
+
+{% include 'staff/nav.html' with userdb=userdb %}
+
+<div class="container-fluid">
+<div class="row ">
+<div class="col-12 p-5">
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th colspan="2" class="bg-dark text-white">History News</th>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <th style="width: 150px; " class="text-center">Date</th>
+        </tr>
+    </thead>
+
+    
+    {% for x in newsdb  %}
+         <tr>
+            <td> {{x.NewsTitle}} </td>
+            <td class="text-center" > {{x.CreatDate}} </td>
+        </tr>
+    {% endfor %}
+        
+        
+</table>
+<table class="table">
+     <thead>
+        <tr>
+            <th colspan="2" class="bg-dark text-white">History Topic</th>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <th style="width: 150px; " class="text-center">Date</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for x in topic  %}
+        <tr>
+            <td> {{x.Topic}} </td>
+            <td class="text-center" > {{x.Date}} </td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+</div>
+</div>
+</div>
+
+{% endblock body %}

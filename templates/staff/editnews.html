@@ -1,0 +1,118 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+    {{newsdb.NewsTitle}}
+{% endblock title %}
+{% block body %}
+{% include 'staff/nav.html' with userdb=userdb %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-6 mt-5 border rounded p-3 shadow-lg">
+            <div class="row">
+                <div class="text-end" style="font-size: 32px;">
+                   
+                    <a href="/panelstaff/data/list/">
+                        <i class="bi bi-x-lg"></i>
+                    </a>
+                </div>
+                <form action="" method="POST" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    <div class="col-12  ">
+        <div class="row">
+            <div class="col-12">
+                <label for="topic"  class="form-label" >Topic:</label>
+                
+                <select required  name="topic" class="  form-select form-control" id="topic">
+                    <option value="{{newsdb.Topic.id}}">{{newsdb.Topic}}  </option>
+                    {% for x in topic  %}
+                    <option value="{{x.id}}"> {{x.Topic}} </option>
+                    {% endfor %}
+                    
+                </select>
+            </div>
+
+            <div class="col-12">
+                <label for="Title"  class="form-label" >Title:</label>
+                <input type="text" name="Title" value="{{newsdb.NewsTitle}}" id="Title" required class="form-control">
+            </div>
+    <div class="col-12">
+        <label for="myEditor" class="form-label">explained</label>
+        <textarea name="myEditor" rows="15"class="w-100 form-control " id="myEditor">
+        {{newsdb.Txt}}
+    </textarea>
+    <textarea id="myTextarea" name="explaine" hidden rows="5" cols="50"></textarea>
+
+   <script>
+    $(document).ready(function(){
+        $("#button1").click(function(){
+            const editorContent = editor.getContents();
+            $("#myTextarea").val(editorContent);
+        })
+    })
+   </script>
+    <script>
+        const editor = SUNEDITOR.create('myEditor', {
+            buttonList: [['undo', 'redo'],['formatBlock'],['bold', 'underline', 'italic', 'strike'],['fontColor', 'hiliteColor'],['align', 'list', 'table'],[],['fullScreen', 'codeView']
+            ]
+        });
+    
+    </script>
+            </div>
+            <div class="col-12 mt-2">
+                {{NewsImagedbform.as_div}}
+                <br>
+                
+                {% for x in  multipleNewsImageAndVideodb %}
+                  image:  <a href="/panelstaff/multipleim/{{x.id}}/{{x.news.id}}"> {{x.image}} <span><i class="bi bi-pencil-square"></i></span> </a> <br>
+                  video:  <a href="/panelstaff/multipleim/{{x.id}}/{{x.news.id}}"> {{x.video}} {% if x.video == "" %}none {% else %} {% endif %}<span><i class="bi bi-pencil-square"></i></span> </a> 
+                        
+                </a> <br>
+                {% endfor %}
+                    
+            </div>
+            <div class="col-12 mt-3 mb-0">
+               <div class="col-12 pb-3">
+                            <label for="onlyvideo">onlyvideo</label>
+                            
+                            
+                            {% if newsdb.onlyvideo == True  %}
+                            <input type="checkbox"  name="onlyvideo" checked id="onlyvideo">
+                            {% else %}
+    <input type="checkbox"  name="onlyvideo"  id="onlyvideo">
+                                
+                            {% endif %}
+                                
+                        </div>
+                <button id="button1" class="btn btn-outline-dark" type="submit">
+                    
+                    {% if request.path == '/panelstaff/Newsdbcreats/' %}
+                        Creat
+                        {% else %}
+                        Save
+                    {% endif %}
+                        
+                </button>
+            </div>
+            
+        </div>
+    </div>
+
+</div>
+</div>
+</form>
+</div>
+</div>
+
+
+<script>
+    $(document).ready(function(){
+        $("#id_Image").addClass('form-control');
+        $("#id_Video").addClass('form-control');
+    })
+</script>
+
+<div class="p-5 m-5 "></div>
+
+{% endblock body %}

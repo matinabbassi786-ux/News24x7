@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+  Staff CreatDate
+{% endblock title %}
+{% block body %}
+{% include 'staff/nav.html' with userdb=userdb %}
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="col-1 p-5 "></div>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-3 border border-5 rounded p-2" style="border-style: dotted !important;">
+                <div class="col-12 gtv85">
+                    {{forms2.as_div}}
+                </div>
+                
+                <div class="col-12 pt-3 ">
+                    <center>
+                    <button class="btn btn-primary" type="submit"> <i class="bi bi-cloud-arrow-up-fill"></i> Submit</button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-1 m-5 p-5 "></div>
+<style>
+    .gtv85 > div{
+        padding: 10px;
+    }
+</style>
+<script>
+    $('input').addClass("form-control ");
+</script>
+</form>
+
+{% endblock body %}

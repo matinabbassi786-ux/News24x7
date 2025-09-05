@@ -1,0 +1,57 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+    Data List
+{% endblock title %}
+
+
+{% block body %}
+{% include 'staff/nav.html' with userdb=userdb %}
+<div class="container-fluid">
+<div class="row justify-content-center">
+<div class="col-6 mt-5">
+
+  <table class="table table-bordered ">
+    <thead>
+
+      <tr>
+        <th class=" bg-dark text-white fs-4 ">  News Not Submit </th>
+        <th class=" bg-dark text-white fs-4 text-center" style="width: 75px;">Edit</th>
+        <th class=" bg-dark text-white fs-4 text-center" style="width: 75px;">Submit</th>
+        <th class=" bg-dark text-white fs-4 text-center" style="width: 75px;">Rejected</th>
+      </tr>
+    </thead>
+
+    
+    {% for c  in newsgb  %}
+      
+    
+    {% if c.JournalistsPermission == None %}
+      
+    
+    <tr>
+      <td><a href=""> {{c.NewsTitle}} </a></td>
+      <td class="text-center  "> <a href=""> <i class="bi bi-pencil-square"></i> </a> </td>
+      <td class="text-center  "> <a href=""> <i class="bi bi-upload"></i>  </a> </td>
+      <td class="text-center  "> <a href=""> <i class="bi bi-ban"></i>  </a> </td>
+    </tr>    
+    {% endif %}
+    {% endfor %}
+
+  </table>
+<!--  -->
+
+
+<style>
+    a:hover{
+        color: red;
+        font-weight: bolder;
+    }
+</style>
+
+</div>
+</div>
+</div>
+{% endblock body %}
+    

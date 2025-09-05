@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+    bookmarker list
+{% endblock title %}
+    
+
+{% block body %}
+<div class="container-fluid">
+<div class="row justify-content-center">
+<div class="col-10 pt-5">
+
+    <ul class="list-group">
+        <a href="/"><li class="list-group-item rounded-top text-end fs-3 bg-dark text-white ">
+        
+            <i class="bi bi-x-lg"></i>
+        
+        </li></a>
+       
+       {% for x in bookmarksall  %}
+        
+       
+       {% for y in x.User.all  %}
+        
+       
+       {% if y.username == request.user.username %}
+      
+        
+        <a href="/{{x.News.slug}}"><li class="list-group-item  text-wrap text-break fs-6 ">
+            <span><i class="bi bi-bookmark-fill"></i></span>  {{x.News.NewsTitle}}
+        </li></a>
+        
+        {% endif %}
+        {% endfor %}
+    {% endfor %}
+    
+    </ul>
+</div>
+</div>
+</div>
+{% endblock body %}
+    

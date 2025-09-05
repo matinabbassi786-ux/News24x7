@@ -1,0 +1,92 @@
+{% extends 'main.html' %}
+
+{% block title %}
+    Login
+{% endblock title %}
+    
+{% block body %}
+<style>
+  .form-check-input:checked {
+    background-color: #f1eeee;
+    border-color: #e8d7dc;
+}
+.form-check-input:focus {
+    border-color: #ece6e6;
+    box-shadow: 0 0 0 .25rem rgba(36, 35, 35, 0.25);
+}
+.form-control:focus {
+    color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);
+    border-color: #e2d2d2;
+    outline: 0;
+    box-shadow: 0 0 0 .25rem rgba(207, 200, 200, 0.25);
+}
+.glass-effect {
+  background-color: rgba(255, 255, 255, 0.15);   
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); 
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(243, 229, 229, 0.1);
+  border-radius: 16px;
+}
+
+</style>
+    
+    <div class="container-fluid pt-5 pb-5  " style=" height: 100vh  ; background-image: url(/static/image/What12.jpeg); background-size: cover; background-attachment: fixed; ">
+        <div class="row justify-content-center">
+<form action="" method="POST" class=" text-white border-0 glass-effect col-10  mt-5 mb-5  p-3 rounded ">
+                {% csrf_token %}
+    <div class="col-12 pb-3 mb-5">
+    <div class="row justify-content-center">
+      <img src="/static/image/logo.svg" class="col-md-5" alt="">
+    </div>
+    </div>
+<div class="row">
+
+    <div class="mb-3 col-6">
+        <label for="username" class="form-label">User Name:</label>
+        <input type="text" id="username" class="form-control " placeholder="" name="username">
+    </div>
+    <div class="mb-3 col-6">
+        <label for="password" class="form-label">Password:</label>
+        <input type="password" id="password" class="form-control " placeholder="" name="password">
+    </div>
+</div>
+                
+                
+                <div class="col-12 mt-5 mb-3 row justify-content-evenly ">
+   <a href="{% url 'registration' %}" style="width: fit-content;" class="btn btn-dark " ><i class="bi bi-person-up"></i> Registration</a>
+  <a  style="width: fit-content;" onclick="showpassworda()" class="btn-light btn showaall " id="togglePassword" >
+    <i class="bi bi-eye-fill"></i> Show
+   </a> 
+   <button type="submit" style="width: fit-content;" class="btn btn-outline-light " name="" id="" >
+    <i class="bi bi-cursor-fill"></i> Submit
+   </button>
+  </div>
+            </form>
+        </div>
+    </div>
+<style>
+#username,#password{
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 1.5px; 
+    }
+</style>
+
+<script>
+  function showpassworda() {
+  var x = document.getElementById("password");
+  
+  if (x.type === "password") {
+    x.type = "text";
+     $(".showaall").html("<i class='bi bi-eye-slash-fill'></i> Hied");
+  } else {
+    x.type = "password";
+     $(".showaall").html("<i class='bi bi-eye-fill'></i> Show");
+  }
+}
+</script>
+    
+    {% endblock body %}

@@ -1,0 +1,94 @@
+ {% extends 'main.html' %}
+
+
+{% block title %}
+    {{mainuserdb}}
+{% endblock title %}
+{% block body %}
+{% include 'staff/nav.html' with userdb=userdb %}
+
+<div class="container-fluid">
+<div class="row justify-content-center">
+<div class="col-6 border rounded p-2 mt-5 ">
+<div class="col-12">
+    <center>
+        <img class="rounded-circle" src="/media/{{mainuserdb.picture}}" width="250" alt="">
+    </center>
+</div>
+<div class="col-12">
+<b>Name:</b> {{mainuserdb.staff_name}} <br>
+<b>Position:</b> {{mainuserdb.position}} <br>
+<b>Date Of Birth:</b> {{mainuserdb.DateOfBirth}} <br>
+<b>Totle Flowing:</b> {{totl}} <br>
+<div class="p-2">
+    
+</div>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form action="" method="POST">
+{% csrf_token %}
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Message</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <label for="Message">Message</label>
+              <input hidden  name="Send" type="text" value="{{mainuserdb.id}}">
+              <textarea maxlength="300" name="Message" class="w-100"  id="Message" cols="30" rows="10"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-outline-dark ">Send  <i class="bi bi-send-fill"></i></button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+</div>
+<div class="col-12">
+    <b>About:</b> <br>
+    {{mainuserdb.aboutme|safe}}
+</div>
+<div class="col-12 mt-5 m-0">
+<button style="font-size: 16px;" type="button" class="btn rounded-0 w-100 btn-outline-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Send Message  <i class="bi bi-send-fill"></i>
+    </button>
+</div>
+</div>
+</div>
+</div>
+
+{% if newsdbtotle  != 0 %}
+<div class="container-fluid">
+<div class="row justify-content-center">
+<div class="col-6 border rounded p-2 mt-5 ">
+
+    
+
+{% for x in  newsdb %}
+<a href="/panelstaff/newsvewsqws/{{x.id}}/{{x.slug}}">
+    <div class="col-12 border m-2">
+        <div class="row">
+            <div class="col">
+                <img src="/media/{{x.Image}}" width="200" alt="">
+            </div>
+            <div class="col">
+                {{x.CreatDate}} <br>
+                {{x.NewsTitle}}
+            </div>
+        </div>
+    </div>
+</a>
+{% endfor %}
+
+</div>
+</div>
+</div>
+{% endif %}
+
+<div class="p-5 m-5">
+
+</div>
+{% endblock body %}

@@ -1,0 +1,91 @@
+{% extends 'main.html' %}
+
+{% block title %}
+    OTP
+{% endblock title %}
+
+{% block body %}
+<script>
+window.documentElement.requestFullscreen();
+document.documentElement.requestPointerLock()
+</script>
+<style>
+  .form-check-input:checked {
+    background-color: #0d0d0d;
+    border-color: #342e30;
+}
+.form-check-input:focus {
+    border-color: #2f2a2a;
+    box-shadow: 0 0 0 .25rem rgba(36, 35, 35, 0.25);
+}
+.form-control:focus {
+    color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);
+    border-color: #2a2727;
+    outline: 0;
+    box-shadow: 0 0 0 .25rem rgba(27, 24, 24, 0.25);
+}
+.glass-effect {
+  background-color: rgba(255, 255, 255, 0.15);   
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); 
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+}
+</style>   
+    
+    <div class="container-fluid pt-5 pb-5  " style=" height: 100vh; background-image: url(/static/image/What12.jpeg); background-size: cover; background-attachment: fixed; ">
+        <div class="row justify-content-center">
+<form method="post" class="text-white border-0 glass-effect col-5  mt-5 mb-5 p-3 rounded ">
+    {% csrf_token %}
+    <div class="col-12 pb-3 mb-3">
+    <div class="row justify-content-center">
+      <img src="/static/image/logo.svg" class="col-md-6" alt="">
+    </div>
+    </div>
+    <div class="mb-3 row justify-content-center ">
+    
+        <div class="input-group " style="width: fit-content;">
+        <input type="password" maxlength="20" class="form-control ms-2 rounded text-center" style="width: fit-content;" name="email_otp" id="email_otp" placeholder="Email OTP" required>
+        <span class="input-group-text btn btn-dark"><i class="bi bi-lock-fill"></i></span>
+        <br>
+        
+
+    </div>
+    </div>
+        <div class="col-12 mb-3  mt-5 row justify-content-evenly">
+    <button type="submit" style="width: fit-content;" class="btn btn-dark " name="" id="" >
+    <i class="bi bi-cursor-fill"></i> Submit
+   </button>
+   <div style="width: fit-content;" id="countdown-display">2:00</div>
+  </div>
+</form>
+        </div>
+    </div>
+
+<script>
+    $(document).ready(function() {
+    var totalSeconds = 120; 
+    var countdownInterval;
+    console.log(totalSeconds)
+    function updateCountdown() {
+        var minutes = Math.floor(totalSeconds / 60);
+        var seconds = totalSeconds % 60;
+        var formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
+
+        $('#countdown-display').text(minutes + ':' + formattedSeconds);
+
+        if (totalSeconds <= 0) {
+            clearInterval(countdownInterval);
+            $('#countdown-display').text("Time's up!"); // Optional: Display message when time runs out
+             window.location.href = "/user/logout/";
+        } else {
+            totalSeconds--;
+        }
+    }
+
+    countdownInterval = setInterval(updateCountdown, 1000); // Update every second
+});
+</script>
+{% endblock body %}

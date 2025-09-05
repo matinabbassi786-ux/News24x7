@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+    Staff Creat News
+{% endblock title %}
+
+
+{% block body %}
+{% include 'staff/nav.html' with userdb=userdb %}
+
+<form action="" method="post">
+{% csrf_token %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-6 border p-0 ">
+                <div class="p-3">
+                    {{a1.as_div}}
+                </div>
+                <button class="btn btn-outline-dark rounded-0 w-100 " type="submit">
+                    submit
+                </button> 
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="p-5 m-5"></div>
+<div class="p-5 m-5"></div>
+<script>
+    $('input').addClass('form-control  ');
+    $('textarea').addClass('form-control  ');
+    $('label').addClass('form-label  ');
+    $('select').addClass('form-select  ');
+</script>
+
+
+
+
+<div class="p-5 m-5"></div>
+{% endblock body %}

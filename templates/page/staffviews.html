@@ -1,0 +1,51 @@
+
+{% extends 'main.html' %}
+
+
+{% block title %}
+     {{StaffMemberdb.staff_name}}    
+{% endblock title %}
+   
+
+
+{% block body %}
+{% include 'nav.html' with TrendingTopicdb=TrendingTopicdb %}
+
+<div class="container-fluid bg-white">
+<div class="row justify-content-center">
+<div class="col-10 pt-5 pb-5 ">
+<div class="row justify-content-center">
+    <div class="col-6">
+<img class="w-100 rounded" src="/media/{{StaffMemberdb.picture}}" alt="" style="max-height: 500px;"> 
+</div>
+    <div class="col-md-6 pt-5 text-break text-wrap" style="font-size: 1rem;">
+        Name: <b>{{ StaffMemberdb.staff_name}}</b> <br> 
+        Date Of Birth: <b>{{StaffMemberdb.DateOfBirth}}</b> <br> 
+        Totle Like: <b>{{totlelikes}} </b> <br> 
+        Totle following: <b>{{followingStafftotle}} </b> <br> 
+        Totle News: <b>{{totleNewsdb}}</b> <br> 
+        
+        {% if followingnuber == 0 %}
+        <a href="/followingftaffuser2/{{StaffMemberdb.staff_name}}/{{ StaffMemberdb.id }}" class="m-0 p-0 btn btn-outline-dark col-12  "><i class="bi bi-person-fill-add"></i> Following </a>
+        {% else %}
+        <a href="/unfollowingnewstopic2/{{StaffMemberdb.staff_name}}/{{ StaffMemberdb.id }}" class="m-0 p-0 btn btn-dark col-12  "><i class="bi bi-person-dash-fill "></i> Unfollowing </a>
+        {% endif %}
+    </div>
+    <div class="col-10 pt-4 border-top mt-5">
+{{StaffMemberdb.aboutme|safe }}
+    </div>
+    <div class="col-12">
+        <div class="col-12 text-center bg-dark text-white fs-5">
+            All News By {{StaffMemberdb.staff_name}}     </div>
+        <div class="row">
+            {% for u in Newsdb  %}
+            <div class="col-md-6  p-3 ">{% include 'card/2.html'  with like=u.slug img=u.Image title=u.NewsTitle topic=u.Topic date=u.CreatDate   %}</div>
+            {% endfor %}
+            
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock body %}   

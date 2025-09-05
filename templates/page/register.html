@@ -1,0 +1,216 @@
+
+{% extends 'main.html' %}
+
+
+
+{% block title %}
+  Registration
+{% endblock title %}
+  
+{% block body %}
+<script>
+  	$(document).ready(function(){
+    $(".hie65").hide();
+        $('#result0').click(function(){
+            if($(this).prop("checked") == true){
+                  var x = document.getElementById("checked0");
+                  x.type = "submit";
+                   $(".hie65").hide();
+                }
+                else if($(this).prop("checked") == false){
+                  var x = document.getElementById("checked0");
+                  x.type = "button";
+               
+            }
+        });
+        $('.subp88').click(function(){
+          var x = document.getElementById("checked0");
+          if (x.type == "button"){
+             $(".hie65").show();
+          }
+        });
+    });
+</script>
+<style>
+  .form-check-input:checked {
+    background-color: #f1eeee;
+    border-color: #e8d7dc;
+}
+.form-check-input:focus {
+    border-color: #ece6e6;
+    box-shadow: 0 0 0 .25rem rgba(36, 35, 35, 0.25);
+}
+.form-control:focus {
+    color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);
+    border-color: #e2d2d2;
+    outline: 0;
+    box-shadow: 0 0 0 .25rem rgba(187, 182, 182, 0.25);
+}
+.glass-effect {
+  background-color: rgba(255, 255, 255, 0.15);   
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); 
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(244, 239, 239, 0.1);
+  border-radius: 16px;
+}
+
+</style>
+<div class="container-fluid h-100" style="background-image: url(/static/image/What12.jpeg); background-size: cover; background-attachment: fixed; ">
+  <div class="row justify-content-center">
+<form action="" method="post" class=" text-white border-0 glass-effect col-10  mt-5 mb-5 p-3 rounded ">
+  {% csrf_token %}
+  <div class="col-12 mb-5">
+    <div class="row justify-content-center">
+      <img src="/static/image/logo.svg" class="col-md-6" alt="">
+    </div>
+  </div>
+  <input type="text" name="latitude" value="" id="latitude" hidden>
+  <input type="text" value="" name="longitude" id="longitude" hidden>
+  <div class="row justify-content-around">
+  <div class=" m-2 col-5 ">
+    {{userform.username.label_tag}} <br>
+    {{userform.username}} <br>
+  </div>
+  <div class="m-2 col-5 ">
+    {{userform.email.label_tag}} <br>
+    {{userform.email}} <br>
+  </div>
+  <div class=" m-2  col-5">
+    {{userform.password1.label_tag}} <br>
+    {{userform.password1}} <br>
+  </div>
+  <div class=" m-2 col-5">
+
+    {{userform.password2.label_tag}} <br>
+    {{userform.password2}} <br>
+  </div>
+  <div class="form-check col-11">
+    <span class="ps-0 ms-0">
+      Gender select
+    </span> <br>
+    
+    <br>
+    
+    
+    <input type="radio" value="Male" class="btn-check" name="Ganders" id="Male" autocomplete="off" checked >
+    <label class="btn btn-outline-light rounded-0 p-2 ps-3 pe-3 " for="Male">
+      <span style="font-size: 32px;"><i class="bi bi-gender-male"></i></span>  <br>
+      <span style="font-size: 16px;">Male</span> 
+    </label>
+    
+    <input value="Female" type="radio" class="btn-check" name="Ganders" id="Female" autocomplete="off">
+    <label class="btn btn-outline-light rounded-0 p-2 ps-3 pe-3 " for="Female">
+      <span style="font-size: 32px;" ><i class="bi bi-gender-female"></i></span> <br>  
+      <span style="font-size: 16px;">Female</span>
+    </label>
+    
+    <input value="Other" type="radio" class="btn-check" name="Ganders" id="Other" autocomplete="off">
+    <label class="btn btn-outline-light rounded-0 p-2 ps-4 pe-4 " for="Other">
+      <span style="font-size: 32px;"><i class="bi bi-gender-trans"></i></span> <br>
+      <span style="font-size: 16px;" >Other</span>
+    </label>
+  </div>
+
+  </div>
+  <div class="text-danger fw-blod mt-1">
+
+     {{ usererros  }} 
+
+     
+      
+  </div>
+   <div class="col-12 pt-3">
+<div class="form-check">
+  <input class="form-check-input chaccik65 " style="background-color: black;" type="checkbox" id="result0" >
+  <label class="form-check-label fw-lighter " for="checkDefault">
+    I agree The <a href="/aboutus/" class="text-danger "> click here read more News24x7</a>
+  </label>
+</div>
+                                </div>
+                                <div class=" text-danger fs-6 hie65 " style="width: fit-content;" role="alert">
+                          Please Check The I Agree
+                          </div>
+ <div class="col-12 mb-3 mt-5 row justify-content-evenly">
+   <a style="width: fit-content;" href="{% url 'login' %}" class="btn btn-dark " ><i class="bi bi-box-arrow-in-left"></i> Login</a>
+   <a  style="width: fit-content;" onclick="showpassworda()" class="btn-light btn showaall " id="togglePassword" >
+    <i class="bi bi-eye-fill"></i> Show
+   </a> 
+   <button type="button" style="width: fit-content;" class="btn btn-outline-light subp88 " name="" id="checked0" >
+    <i class="bi bi-cursor-fill"></i> Submit
+   </button>
+
+  </div>
+</form>
+  </div>
+</div>
+
+<script>
+  function showpassworda() {
+  var x = document.getElementById("id_password2");
+  var y = document.getElementById("id_password1");
+  if (x.type === "password") {
+    x.type = "text";
+    y.type = "text";
+     $(".showaall").html("<i class='bi bi-eye-slash-fill'></i> Hied");
+  } else {
+    x.type = "password";
+    y.type = "password";
+     $(".showaall").html("<i class='bi bi-eye-fill'></i> Show");
+  }
+}
+</script>
+<style>
+  #id_username,#id_email,#id_password1,#id_password2{
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 1.5px; 
+  }
+</style>
+<script>
+
+$("#id_username").addClass("form-control");
+$("#id_email").addClass("form-control");
+$("#id_password1").addClass("form-control");
+$("#id_password2").addClass("form-control");
+const x = document.getElementById("demo");
+getLocation();
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(success, error);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+    
+function success(position) {
+    x.innerHTML="Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
+    console.log( position.coords.latitude) ;
+    console.log( position.coords.longitude);
+    console.log(document.cookie);
+    $("#latitude").val( position.coords.latitude);
+    $("#longitude").val( position.coords.longitude);
+}
+
+function error(error) {
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+      x.innerHTML = "User denied the request for Geolocation."
+      break;
+    case error.POSITION_UNAVAILABLE:
+      x.innerHTML = "Location information is unavailable."
+      break;
+    case error.TIMEOUT:
+      x.innerHTML = "The request to get user location timed out."
+      break;
+    case error.UNKNOWN_ERROR:
+      x.innerHTML = "An unknown error occurred."
+      break;
+  }
+}
+</script>
+{% endblock body %}
+  

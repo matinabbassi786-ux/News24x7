@@ -1,0 +1,130 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+    Panel Staff
+{% endblock title %}
+    
+
+{% block body %}
+
+{% include 'staff/nav.html' with userdb=userdb %}
+
+<div class="container-fluid  pt-5 mb-5 ">
+<div class="row justify-content-around ">
+<div class="col-10 border rounded pt-3 pb-3  ">
+<center>
+    <div class="col-6">
+       <img src="/media/{{userdb.picture}} " style="aspect-ratio: 16/9; object-fit: cover;" class="w-100 rounded" alt=""> </div>
+    <div class="col-8 text-start mt-3 border-top ps-3 pt-3 ">
+        <div class="row">
+            <div class="col-6 border-end text-break text-wrap ">
+                <p>
+                    Name: <b> {{userdb.staff_name}} </b> <br> <br>
+                    Position: <b> {{userdb.position}} </b> <br> <br>
+                    Date Of Birth: <b> {{userdb.DateOfBirth}} </b> <br><br>
+                    Phone Number: <b> {{userdb.PhoneNumber}} </b> <br><br>
+                    Joing Date: <b> {{userdb.JoinDate}} </b> <br><br>
+                    Leaveing Date: <b> {{userdb.LeaveDate}}</b> <br><br>
+                </p>
+            </div>
+            <div class="col-6 text-break text-wrap">
+                <p>
+                 ZipCode: <b>{{userdb.ZipCode}}</b> <br>
+                 <hr>
+                 Office: <b>{{userdb.Office}}</b> <br>
+                 <hr>
+                 One Address: <b>{{userdb.OneAddress}}</b> <br>
+                 <hr>
+                 Two Address: <b>{{userdb.TwoAddress}}</b> <br>
+                </p>
+            </div>
+            <div class="col-12 border-top text-wrap text-break ">
+                <p class="pt-2">
+                    {{userdb.aboutme|safe}}
+                </p>
+            </div>
+        </div>
+    </div> 
+</center>
+</div>
+</div>
+</div>
+
+
+
+<div class="p-5">
+  <canvas id="myChart"></canvas>
+</div>
+
+<style>
+  .bg592:nth-child(odd)>div{
+    background-color: rgba(128, 128, 128, 0.333);
+  }
+</style>
+
+<div class="container-fluid mt-3 mb-5 ">
+<div class="row justify-content-center p-0">
+<div class="border rounded shadow-lg  col-10 p-0 ">
+<div class="bg-dark text-white col-12 rounded-top ps-3 fs-1 ">messeng </div>
+<div class="col-12">
+<div class="row  m-3 ">
+
+
+{% for x in  meaxax|slice:":50:" %}
+    <div class="col-12 border rounded m-2   ">
+      <div class="row"> 
+        <div style="width: fit-content;"> <img  height="75" src="/media/{{x.user.picture}}" alt=""></div>
+        <div style="width: fit-content;">
+          <p>
+            From: <b>
+              <a href="/panelstaff/uservews/{{x.user}}/{{x.user.id}}">{{x.user}}</a> </b> <br>
+         {{x.Txt}}
+          </p>
+        </div>
+      </div>
+    </div>
+
+{% endfor %}
+  
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container-fluid">
+    <div class="p-5 m-5 col-6"></div>
+</div>
+
+<script>
+var xValues = ["{{dataday1}}", "{{dataday2}}", "{{dataday3}}", "{{dataday4}}", "{{dataday5}}",'{{dataday6}}','{{dataday7}}'];
+var yValues = ['{{data1}}','{{data2}}','{{data3}}','{{data4}}','{{data5}}','{{data6}}','{{data7}}'];
+var barColors = [ 'rgba(255, 99, 132 , 0.6)','rgba(255, 159, 64, 0.6)','rgba(255, 205, 86, 0.6)','rgba(75, 192, 192, 0.6)','rgba(54, 162, 235, 0.6)','rgba(153, 102, 255, 0.6)','rgba(201, 203, 207, 0.6)'];
+var bordercolorq =[ 'rgb(255, 99, 132)','rgb(255, 159, 64)','rgb(255, 205, 86)','rgb(75, 192, 192)','rgb(54, 162, 235)','rgb(153, 102, 255)','rgb(201, 203, 207)']
+new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      label: 'You Data ',
+      backgroundColor: barColors,
+      borderColor:bordercolorq,
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "World Wine Production 2018"
+    }
+  }
+});
+</script>
+
+
+{% endblock body %}
+    

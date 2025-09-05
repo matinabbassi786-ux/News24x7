@@ -1,0 +1,410 @@
+{% extends 'main.html' %}
+
+
+
+{% block body %}
+{% include 'nav.html' with TrendingTopicdb=TrendingTopicdb %}
+
+<style>
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+
+.fadeInUp {
+  animation: fadeInUp 1s ease-out  forwards;
+   animation-delay: 5ms;
+
+}
+</style>
+<script>
+  $(document).ready(function() {
+  function checkVisible() {
+    $(".section9").each(function() {
+      let elementTop = $(this).offset().top;
+      let windowBottom = $(window).scrollTop() + $(window).height();
+     
+      if (windowBottom >= elementTop + $(this).height() * 0.1) {
+        $(this).addClass("fadeInUp");
+      }else{
+        $(this).removeClass("fadeInUp"); 
+      }
+
+    });
+  }
+  checkVisible();
+  $(window).on("scroll", checkVisible);
+});
+
+</script>
+
+<!-- A1  -->
+<div class=" bg-white container-fluid  section9  ">
+  <div class="row p-0 justify-content-center ">
+
+  <div class="col-md-10 rounded  pt-2 mt-3 pb-2 ">
+    <div class="row justify-content-end ">
+      <div class="card text-bg-dark mb-3" style="max-width: 18rem;">
+  <div class="card-header text-center">Surat, Gujarat</div>
+  <div class="card-body">
+    <h5 class="card-title ">{{temperature}} &#8457;</h5>
+    <p class="card-text">
+      Description: {{description}}<br>
+      Humidity: {{humidity}}% <br>
+      Time: <span style="font-size: 12px;">
+        {{datetime}} 
+      </span>
+      <br>
+    </p>
+  </div>
+</div>
+    </div>
+  </div>
+  </div>
+</div>
+<div class=" bg-white container-fluid  mb-5  section9  ">
+  <div class="row p-0 justify-content-center pt-5 pb-5">
+
+  <div class="col-md-10 rounded  pt-2 pb-2 ">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+         <!-- B1 2 -->
+          
+          {% for x in newsdb|slice:":2"   %}
+          <div class="col-sm-6 mt-2 mb-2 element-to-animatedivas sectiondiv ">
+             {% include 'card/1.html' with like=x.slug img=x.Image title=x.NewsTitle topic=x.Topic date=x.CreatDate   %} 
+            </div>
+          {% endfor %}
+         <!-- B1 -->
+         
+          <div class="col-12 multiple-items1 mt-2 mb-2"> 
+          <!-- B2 MAX 15 COKIE -->
+            
+            {% for x in  newsdb|slice:"2:17:" %}
+            <div class="p-1">  {% include 'card/1.html' with like=x.slug img=x.Image title=x.NewsTitle topic=x.Topic date=x.CreatDate %}  </div>
+            {% endfor %}
+        
+          <!-- B2 MAX 15 COKIE -->
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6"> 
+        <!-- B3 5 -->
+         
+         {% for x in newsdb|slice:"16:20:"  %}
+          
+         
+         <div  class="mt-3 mb-2 sectiondiv "> {% include 'card/2.html' with like=x.slug img=x.Image title=x.NewsTitle topic=x.Topic date=x.CreatDate %} </div>
+         {% endfor %}
+       
+        <!-- B3 5 -->
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<hr>
+<!-- A1 -->
+<!-- A2 -->
+<div class=" rounded  pb-2 mt-5 mb-5 section9 container">
+  <div class="row">
+    <div class="col-md-6">
+      <!--B1 6 -->
+      <div class="row">
+        
+        {% for x in newsdb|slice:"20:26:"  %}
+        
+        <div class="p-2 sectiondiv"> {% include 'card/4.html' with like=x.slug img=x.Image title=x.NewsTitle topic=x.Topic date=x.CreatDate %} </div>
+        {% endfor %}
+      
+      </div>
+      <!--B1 -->
+    </div>
+    <div class="col-md-6">
+      <!--B2 6 -->
+      <div class="row">
+        
+        {% for x in newsdb|slice:"26:32:"  %}
+          
+        
+        <div class="p-2 sectiondiv"> {% include 'card/2.html' with like=x.slug img=x.Image title=x.NewsTitle topic=x.Topic date=x.CreatDate %} </div>
+        {% endfor %}
+       
+      </div>
+      <!--B2 -->
+    </div>
+  </div>
+</div>
+<!-- A2 -->
+<hr>
+<!-- A3 -->
+<div class="container mt-5 mb-5 section9">
+   <div class="row">
+    <div class="col-sm-6">
+      <div class="p-2 multiple-items1 ">
+        <!-- B1 MAX 25 -->
+         
+         {% for x in newsdb2|slice:":5" %}
+          
+         
+         {% if x.onlyvideo == True %}
+           <div class="p-2"> {% include 'card/5.html' with like=x.slug img=x.Video title=x.NewsTitle topic=x.Topic date=x.CreatDate %} </div>
+
+         {% endif %}
+         
+         {% endfor %}
+        <!-- B1 MAX 25 -->
+      </div>
+    </div> 
+    <div class="col-sm-6">
+      <div class="p-2 multiple-items2 ">
+        <!-- B2 MAX 25 -->
+        
+         {% for x in newsdb2|slice:"5:10" %}
+          
+         
+
+           <div class="p-2"> {% include 'card/5.html' with like=x.slug img=x.Video title=x.NewsTitle topic=x.Topic date=x.CreatDate %} </div>
+
+        
+         
+         {% endfor %}
+       
+          <!-- B2 MAX 25 -->
+      </div>
+    </div> 
+   </div>
+</div>
+<!-- A3 -->
+<hr>
+<!-- B1 4 -->
+<div class="container mt-5 mb-5 section9">
+  <div class="row">
+    
+    {% for x in newsdb|slice:"32:56"  %}
+      
+    
+    <div class="col-md-3 mt-3 sectiondiv "> {% include 'card/1.html' with like=x.slug img=x.Image title=x.NewsTitle topic=x.Topic date=x.CreatDate %} </div>
+    {% endfor %}
+    
+    <!-- B1 4 -->
+    <div class="col-12 ">
+      <div class="row">
+        <!-- B2 4 -->
+        {% for x  in  newsdb|slice:"56:80" %}
+        
+        <div class="col-md-3 mt-3 sectiondiv "> {% include 'card/3.html' with like=x.slug img=x.Image title=x.NewsTitle topic=x.Topic date=x.CreatDate %} </div>
+        {% endfor %}
+        
+        <!-- B2 4 -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- A4 -->
+ <hr>
+<!-- A5 -->
+ <div class="container mt-5 mb-5 section9  "> 
+  <div class="row">
+    <div class="col-md-6">
+      <!-- B1 -->
+       <div class="row">
+        <div class="col-12">
+          
+          {% for x in newsdb|slice:"80:81"  %}      
+          <div class="sectiondiv">
+            {% include 'card/1.html'  with like=x.slug img=x.Image title=x.NewsTitle topic=x.Topic date=x.CreatDate %}
+          </div>
+          
+          {% endfor %}
+        </div>
+        <div class="col-12">
+          
+          {% for x in  newsdb|slice:"81:84"  %}
+          <div class="p-1 sectiondiv"> {% include 'card/2.html' with like=x.slug img=x.Image title=x.NewsTitle topic=x.Topic date=x.CreatDate  %} </div>
+          {% endfor %}
+        </div>
+      </div>
+      <!-- B1 -->
+    </div>
+    <div class="col-md-6">
+      <!-- B2 15 -->
+       <ul class="list-group">
+
+        
+        {% for x in  newsdb|slice:"53:70"   %}
+        
+        <a href="/{{x.slug}}"><li style="font-size: 16px;" class="fw-bolder mt-2 list-group-item text-break text-wrap rounded border-3">
+          {{x.NewsTitle}}
+        </li></a>
+        {% endfor %}
+</ul>
+      <!-- B2 -->
+    </div>
+  </div> 
+ </div>
+<!-- A5 --> 
+<!-- A6 -->
+ <div class="container d-none section9">
+   <div class="row">
+    <div class="col-sm-6">
+      <div class="p-2 multiple-items1 ">
+        <!-- B1 MAX 25 -->
+        <div class="p-2"> {% include 'card/1.html' %} </div>
+        <div class="p-2"> {% include 'card/1.html' %} </div>
+        <div class="p-2"> {% include 'card/1.html' %} </div>
+        <div class="p-2"> {% include 'card/1.html' %} </div>
+        <div class="p-2"> {% include 'card/1.html' %} </div>
+        <!-- B1 MAX 25 -->
+      </div>
+    </div> 
+    <div class="col-sm-6">
+      <div class="p-2 multiple-items2 col-12 ">
+        <!-- B2 MAX 25 -->
+          <div> {% include 'card/2.html' %} </div>
+          <div> {% include 'card/2.html' %} </div>
+          <div> {% include 'card/2.html' %} </div>
+          <div> {% include 'card/2.html' %} </div>
+          <div> {% include 'card/2.html' %} </div>
+          <div> {% include 'card/2.html' %} </div>
+          <!-- B2 MAX 25 -->
+      </div>
+      <!-- B3 MAX25 -->
+        <div class="p-2 multiple-items3 col-12 ">
+          <div> {% include 'card/2.html' %} </div>
+          <div> {% include 'card/2.html' %} </div>
+          <div> {% include 'card/2.html' %} </div>
+          <div> {% include 'card/2.html' %} </div>
+          <div> {% include 'card/2.html' %} </div>
+          <div> {% include 'card/2.html' %} </div>
+          
+      </div>
+      <!-- B3 -->
+    </div> 
+   </div>
+</div>
+<!-- A6 -->
+<!-- A7 -->
+<div class="container mt-5 mb-5 mb-3 "> 
+<div class="row justify-content-around section9">
+
+  
+  {% for y in TrendingTopicdb %}
+    <!-- {{y.}} -->
+  
+  <div class="col-md-3 p-0   m-3 rounded border " style="height: fit-content;">
+    <div class="bg-dark rounded-top text-white text-center fw-bolder fs-5 text-uppercase ">
+      {{y.NewsTopic}}
+    </div>
+    
+    <div class="m-0 col-12">
+      
+      {% for x in newsdb  %}
+        
+        {% if x.Topic == y.NewsTopic %}
+
+        {% include 'card/1.html' with maincs="qad87445415" like=x.slug img=x.Image title=x.NewsTitle topic=x.Topic date=x.CreatDate %}
+        
+        {% endif %}
+      {% endfor %}
+    
+    </div>
+    <div class="col-12">
+      <ul style=" list-style: none;" class="p-1">
+        <!-- B2 5 -->
+        
+        {% for  x in newsdb   %}
+          
+        
+        {% if x.Topic == y.NewsTopic  %}
+        <a href="{{x.slug}}" class="rfwef95">
+          <li style="font-size: 16px;" class="fw-bolder mb-3  mt-3 list-group-item  text-break text-wrap border-bottom  pb-1 ">
+          {{x.NewsTitle}}
+        </li></a>
+        {% endif %}
+        
+        {% endfor %}
+        <!-- B2 -->
+      </ul>
+    </div>
+    <a href="/Topic/{{y.Topic}}/">
+      <div class="text-center text-capitalize text-break text-wrap text-white bg-dark rounded-bottom fs-5 ">
+        See More  {{y.Topic}}
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+
+</div>
+</div>
+<!-- A7 -->
+
+
+
+<script>
+$('.multiple-items1').slick({
+  infinite: true,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,
+    autoplaySpeed: 3000,
+    speed: 300,
+  prevArrow: '<button class="carousel-control-prev " type="button" data-bs-target="#carouselExample" data-bs-slide="prev"><span class=" bi bi-chevron-double-left fs-3 btn  btn-dark rounded-circle" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>',
+    nextArrow: '<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next"><span class="bi bi-chevron-double-right rounded-circle btn btn-dark fs-3" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>',
+});
+$('.multiple-items2').slick({
+  infinite: true,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,
+    autoplaySpeed: 2000,
+    speed: 300,
+  prevArrow: '<button class="carousel-control-prev " type="button" data-bs-target="#carouselExample" data-bs-slide="prev"><span class=" bi bi-chevron-double-left fs-3 btn  btn-dark rounded-circle" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>',
+    nextArrow: '<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next"><span class="bi bi-chevron-double-right rounded-circle btn btn-dark fs-3" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>',
+});
+$('.multiple-items3').slick({
+  infinite: true,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,
+    autoplaySpeed: 3500,
+    speed: 300,
+  prevArrow: '<button class="carousel-control-prev " type="button" data-bs-target="#carouselExample" data-bs-slide="prev"><span class=" bi bi-chevron-double-left fs-3 btn  btn-dark rounded-circle" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>',
+    nextArrow: '<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next"><span class="bi bi-chevron-double-right rounded-circle btn btn-dark fs-3" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>',
+});
+</script>
+<style>
+  .rfwef95{
+    display: none;
+  }
+  .rfwef95:nth-child(){display:block ;}
+  .rfwef95:nth-child(2){display:block ;}
+  .rfwef95:nth-child(3){display:block ;}
+  .rfwef95:nth-child(4){display:block ;}
+  .rfwef95:nth-child(5){display:block ;}
+  .rfwef95:nth-child(6){display:block ;}
+  .rfwef95:nth-child(7){display:block ;}
+  .rfwef95:nth-child(8){display:block ;}
+  .rfwef95:nth-child(9){display:block ;}
+  .rfwef95:nth-child(11 ){display:block ;}
+  .qad87445415:first-child{
+    display: block;
+  }
+  .qad87445415{
+    display: none;
+  }
+
+</style>
+{% include 'flooter.html' %}
+{% endblock body %}
+  
