@@ -10,7 +10,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
    'localhost', 
-   '127.0.0.1'
+   '127.0.0.1',
 ]
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30 
 
@@ -102,12 +102,12 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # news24x7wabsit@gmail.com
-# bpwj fjgg fgiq xxfn
+
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'news24x7wabsit@gmail.com'
-EMAIL_HOST_PASSWORD = 'bpwj fjgg fgiq xxfn'
+EMAIL_HOST_PASSWORD = ''
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # STATIC_ROOT ="static/"
