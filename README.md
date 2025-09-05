@@ -25,4 +25,4 @@
     
 At **News 24x7**, we believe that news should not only inform but also connect people through interaction and discussion
 
-![The San Juan Mountains are beautiful!](/assets/images/san-juan-mountains.jpg "San Juan Mountains")
+![The San Juan Mountains are beautiful!](https://raw.githubusercontent.com/matinabbassi786-ux/News24x7/refs/heads/main/DOC/News24x7_Database_Schema.svg "San Juan Mountains")
