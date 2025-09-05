@@ -25,4 +25,5 @@
     
 At **News 24x7**, we believe that news should not only inform but also connect people through interaction and discussion
 
+## Database Schema 
 ![The San Juan Mountains are beautiful!](https://raw.githubusercontent.com/matinabbassi786-ux/News24x7/refs/heads/main/DOC/News24x7_Database_Schema.svg "San Juan Mountains")
