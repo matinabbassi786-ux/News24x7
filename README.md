@@ -21,5 +21,6 @@
   - **📰 Simple & Clean Design:**– Easy to navigate for all users.
   -  **Accessible in Multiple Languages**– Reaching audiences in both Hindi and Gujarati.
   -  **Interactive Experience**– Go beyond reading – bookmark, follow, like, and comment.
-  -  **Learning-Oriented**– A project that demonstrates how modern news websites are built. 
-  At **News 24x7**, we believe that news should not only inform but also connect people through interaction and discussion
+  -  **Learning-Oriented**– A project that demonstrates how modern news websites are built.
+    
+At **News 24x7**, we believe that news should not only inform but also connect people through interaction and discussion
