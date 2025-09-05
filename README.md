@@ -24,3 +24,5 @@
   -  **Learning-Oriented**– A project that demonstrates how modern news websites are built.
     
 At **News 24x7**, we believe that news should not only inform but also connect people through interaction and discussion
+
+![The San Juan Mountains are beautiful!](/assets/images/san-juan-mountains.jpg "San Juan Mountains")
