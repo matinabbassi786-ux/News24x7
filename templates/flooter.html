@@ -11,7 +11,7 @@
     <div class="col-sm-3 mt-5 ">
       <ul>
         <li><a href="/aboutus/" class="text-white">About US</a></li>
-        <li><a href="/ContactUs/" class="text-white">Contact Us</a></li>
+        {% comment %} <li><a href="/ContactUs/" class="text-white">Contact Us</a></li> {% endcomment %}
         {% for x in TrendingTopicdb|slice:":10"  %}
         <li><a href="/Topic/{{x.NewsTopic}}" class="text-white">{{x.NewsTopic}}</a></li>
         {% endfor %}

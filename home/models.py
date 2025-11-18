@@ -64,6 +64,8 @@ class multipleNewsImageAndVideo(models.Model):
 class TrendingTopic(models.Model):
     NewsTopic = models.OneToOneField(Topic,on_delete=models.CASCADE) 
     Date = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.NewsTopic.Topic
 
 
 # class ReplyByNews24x7(models.Model):

@@ -26,9 +26,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'customer', 
       'tinymce',
-      'ckeditor',
         'ckeditor_uploader',
-        'API'
+        'API',
+        "background_task",
+        "translate",
+        'django_ckeditor_5',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +53,7 @@ TEMPLATES = [
         ],
         'APP_DIRS': True,
         'OPTIONS': {
+
             'context_processors': [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -64,12 +67,14 @@ WSGI_APPLICATION = 'news24x7.wsgi.application'
 
 DATABASES = {
     'default': {
-    'ENGINE': 'django.db.backends.mysql',
+    'versionCheck': False,
+    'ENGINE': 'mysql.connector.django',
     'NAME': 'news24x7db',
     'HOST': '127.0.0.1',
     'PORT': '3306',
     'USER': 'root',
-    'PASSWORD':'1234',
+    'PASSWORD':'gj09bm1947',
+    
 }
 }
 
@@ -107,7 +112,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'news24x7wabsit@gmail.com'
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = 'ffcj jylq divt gzwd'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # STATIC_ROOT ="static/"

@@ -1,0 +1,76 @@
+{% extends 'main.html' %}
+
+
+{% block title %}
+    Trending Topics
+{% endblock title %}
+
+
+{% block body %}
+{% include 'staff/nav.html' with userdb=userdb %}
+
+<div class="container-fluid">
+<div class="row justify-content-evenly">
+    <div class="col-10  mt-5">
+        <input id="myInput"  type="text" class="form-control  rounded-0 rounded-top-2 " placeholder="Search..">
+        <table class="table table-bordered  table-hover table-striped  w-100">
+            <thead>
+                <tr>
+                    <th colspan="10" class="bg-dark text-white">
+                       Trending Toics DB
+                    </th>
+                </tr>
+                <tr>
+                    <th >Topic</th>
+                    <th style="width: 100px;">Delet</th>
+                    <th style="width: 100px;">Add</th>
+                </tr>
+            </thead>
+            <tbody  id="myTable" >
+                
+                {% for x in  topcdb %}
+                    <tr>
+                        <td>
+                            {{x.NewsTopic}}
+                        </td>
+                        <td>
+                            <center>
+                                <a href="wdknqwd/{{x.id}}">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <a href="/panelstaff/CtreateTrendingToicsDB/">
+                                  <i class="bi bi-pencil-square"></i>
+                                </a>
+                            </center>
+                        </td>
+                        
+                    </tr>
+                {% endfor %}
+                    
+                
+                    
+            </tbody>
+            
+        </table>
+    </div>
+</div>
+</div>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+<div>
+    <div class="p-5 m-5 "></div>
+    <div class="p-5 m-5 "></div>
+</div>
+{% endblock body %}

@@ -13,6 +13,8 @@ from customer.forms import RegisterForm,UserInfoForm
 from .forms import StaffMemberdb
 from customer.forms import RegisterForm
 from customer.models import UserInfo
+from django import forms
+
 
 def index(request):
     if request.user.is_staff == False:return redirect('/')
@@ -743,8 +745,8 @@ def Messages(request):
 
 
 def StaffAll(request):
-    if userdb.position  not in ["Admin","CEO","Manager"]: return redirect('/')
     userdb = StaffMember.objects.get(user=request.user)
+    if userdb.position  not in ["Admin","CEO","Manager"]: return redirect('/')
     Staffall  = StaffMember.objects.all()[::-1]
     data ={
         'userdb':userdb,
@@ -775,10 +777,10 @@ def Staffadd(request):
 
 
 def Staffcreate(request):
-    if userdb.position  not in ["Admin","CEO","Manager"]: return redirect('/')
     userdb = StaffMember.objects.get(user=request.user)
     forms = StaffMemberdb()
     forms2 = RegisterForm()
+    if userdb.position  not in ["Admin","CEO","Manager"]: return redirect('/')
 
     
     if request.method == 'POST':
@@ -823,3 +825,33 @@ def Staffcreate2(request,pk):
         "user":userd
     }
     return render(request,'staff/Staffcreate2.html',data)
+
+
+def Trending_topics(request):
+    topcdb = TrendingTopic.objects.all()
+    data ={
+        "topcdb":topcdb
+    }
+    return render(request,'staff/Trending_topics.html',data)
+
+def wdknqwd(request,id):
+    topcdb = TrendingTopic.objects.get(id=id)
+    topcdb.delete()
+    return redirect("/panelstaff/")
+
+class MyModelForm(forms.ModelForm):
+        class Meta:
+            model = TrendingTopic
+            fields = '__all__'
+            
+def createtrtop(request):
+    Trending_topicsFormdv = MyModelForm()
+    if request.method == 'POST':
+        Trending_topicsFormdv = MyModelForm(request.POST)
+        if Trending_topicsFormdv.is_valid():
+            Trending_topicsFormdv.save()
+            return redirect("/panelstaff/")
+    data ={
+        "Trending_topicsFormdv":Trending_topicsFormdv
+    }
+    return render(request ,"staff/createtrtop.html",data)

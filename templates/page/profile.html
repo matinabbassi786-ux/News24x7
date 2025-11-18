@@ -24,6 +24,10 @@
 }
 
 </style>
+<script>
+    $("select").addClass("form-select")
+</script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <video class="video-background " src="/static/image/zero.mp4" autoplay loop muted ></video>
 <div class="container-fluid row pt-5 mb-3 justify-content-center">
 <div class="col-10 row justify-content-center">
@@ -112,6 +116,13 @@
 <span class="d-none">
     {{dbform.picture}}
 </span>
+<label for="id_language">language</label>
+
+<select name="language" name="language" class="form-select" id="id_language">
+    <option value="en">English</option>
+    <option value="hi">हिन्दी</option>
+    <option value="gu">ગુજરાતી</option>
+</select>
 
     </div>
     <div class="modal-footer">

@@ -41,6 +41,7 @@
          object-fit: cover;
     }
 </style>
+
 <div class="container-fluid  bg-white">
     <div class="row justify-content-center">
         <div class="col-10 mb-5">
@@ -85,10 +86,21 @@
                     {% endfor %}
                     </span> <br>
 
-                   <button class="btn btn-dark  btn-sm spedcd95 "><i class="bi bi-megaphone-fill"></i> Speak</button>   <br>
+                   <!-- <button class="btn btn-dark  btn-sm spedcd95 "><i class="bi bi-megaphone-fill"></i> Speak</button>   <br> -->
                 </span> <br> <br>
-                    {{ newsdb.NewsTitle }}
-                </h1>
+                {% if dxach.language == "en" %}
+                {{ newsdb.NewsTitle }}
+                {% endif %}
+                
+                {% if dxach.language == "gu" %}
+                {{ gu_db.NewsTitle }}
+                {% endif %}
+                
+                {% if dxach.language == "hi" %}
+                {{ hi_db.NewsTitle }}
+                {% endif %}
+                
+            </h1>
             </div>
             <div class="col-12">
                 <div class="row justify-content-center">
@@ -141,7 +153,15 @@
                     </div>
                     <div class="col-12 border-start border-end border-2 pb-5  ">
                         <p style="font-size: 22px;" class="mb-5 pb-5 ">
-                             {{ newsdb.Txt |safe }}
+                            {% if dxach.language == "en"  %}
+                            {{ newsdb.Txt |safe }}
+                            {% endif %} 
+                            {% if dxach.language == "gu"  %}
+                            {{ gu_db.Txt |safe }}
+                            {% endif %} 
+                            {% if dxach.language == "hi"  %}
+                            {{ hi_db.Txt |safe }}
+                            {% endif %} 
                         </p>
                     </div>
                 </div>
@@ -202,7 +222,7 @@
 {% endif %}
     
 <a href="/report/{{newsdb.id}}" style="width: fit-content; height: fit-content;" class=" col-auto  btn btn-outline-light "><i class="bi bi-flag-fill"></i></a>
-<div class="dropdown" style="width: fit-content;">
+<!-- <div class="dropdown" style="width: fit-content;">
 
     <button style="width: fit-content; height: fit-content;" data-bs-toggle="dropdown" aria-expanded="false" class=" col-auto dropdown-toggle btn btn-outline-light ">
         <i class="bi bi-translate"></i></button>
@@ -212,7 +232,7 @@
     <li><a class="dropdown-item" href="/Gujarati/{{newsdb.id}}/{{newsdb.NewsTitle}}">Gujarati ( ગુજરાતી )</a></li>
     
   </ul>
-</div>
+</div> -->
 
                        </div> 
                     </div>
@@ -294,10 +314,26 @@
         <div class="row justify-content-center">
             <div class="col-10 border pb-3 mb-5 rounded ">
                 <div class="row">
-                    
-                    {% for u  in allnewsdb|slice:":20"  %}
-                    <div class="col-md-6 p-2 ">{% include 'card/2.html'  with like=u.slug img=u.Image title=u.NewsTitle topic=u.Topic date=u.CreatDate   %}</div>
-                    {% endfor %}
+                
+                {% if dxach.language == "en" %}
+                {% for u  in allnewsdb|slice:":20"  %}
+                <div class="col-md-6 p-2 ">{% include 'card/2.html'  with like=u.slug img=u.Image title=u.NewsTitle topic=u.Topic date=u.CreatDate   %}</div>
+                {% endfor %}
+                {% endif %}
+
+                  {% if dxach.language == "hi" %}
+                {% for u  in newsallhi|slice:":20"  %}
+                <div class="col-md-6 p-2 ">{% include 'card/2.html'  with like=u.News.slug img=u.News.Image title=u.NewsTitle topic=u.News.Topic date=u.News.CreatDate   %}</div>
+                {% endfor %}
+                {% endif %}
+
+                 {% if dxach.language == "gu" %}
+                {% for u  in newsallgu|slice:":20"  %}
+                <div class="col-md-6 p-2 ">{% include 'card/2.html'  with like=u.News.slug img=u.News.Image title=u.NewsTitle topic=u.News.Topic date=u.News.CreatDate   %}</div>
+                {% endfor %}
+                {% endif %}
+
+
                 </div>
             </div>
         </div>
@@ -312,9 +348,17 @@
             <div class="col-10">
                 <div class="row">
 
-                    {% for u in five_unique_elements  %}
-                    <div class="col-md-6 p-2 ">{% include 'card/2.html'  with like=u.slug img=u.Image title=u.NewsTitle topic=u.Topic date=u.CreatDate   %}</div>
-                    {% endfor %}
+{% if dxach.language == "en" %}
+{% for u in five_unique_elements  %}
+<div class="col-md-6 p-2 ">{% include 'card/2.html'  with like=u.slug img=u.Image title=u.NewsTitle topic=u.Topic date=u.CreatDate   %}</div>
+{% endfor %}
+{% endif %}
+
+{% if dxach.language == "hi" %}
+{% for u in newshi2  %}
+<div class="col-md-6 p-2 ">{% include 'card/2.html'  with like=u.News.slug img=u.News.Image title=u.NewsTitle topic=u.News.Topic date=u.News.CreatDate   %}</div>
+{% endfor %}
+{% endif %}
                     
                 </div>
             </div>

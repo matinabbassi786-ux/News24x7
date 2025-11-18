@@ -1,4 +1,3 @@
-
 from django.shortcuts import render,redirect
 from .models import News,TrendingTopic,Topic,newsLike,bookmarks,Comments,FollowingNewsTopic,followingStaff,Report,multipleNewsImageAndVideo
 from customer.models import UserInfo
@@ -16,6 +15,9 @@ import random
 import python_weather
 import asyncio
 import os
+from translate.models import News_hindi,News_gujarati
+
+from translate.tasks import translate_
 
 def remove_html_tags_bs4(html_string):
     soup = BeautifulSoup(html_string, 'html.parser')
@@ -28,10 +30,12 @@ def remove_html_tags_bs4(html_string):
 class UserInfoForm(forms.ModelForm):
         class Meta:
             model = UserInfo
-            fields = ['picture']
+            fields = ['picture',"language"]
             
             
-def index(request):       
+def index(request):
+    
+    translate_()
     if chickingvalue(request) == False: return redirect('user/login/')
     newsdb = News.objects.all().filter(ManagersPermission=True,onlyvideo=False)[::-1]
     newsdb2 = News.objects.all().filter(ManagersPermission=True,onlyvideo=True)[::-1]
@@ -39,7 +43,6 @@ def index(request):
     alltopic = Topic.objects.all()[::-1]
     async def main() -> None:
       async with python_weather.Client(unit=python_weather.IMPERIAL) as client:
-    
         weather = await client.get('Surat, Gujarat')
         return {
         "temperature":weather.temperature,
@@ -63,9 +66,13 @@ def index(request):
         "datetime":qrow["datetime"],
         
     }
+    dxach = UserInfo.objects.get(UserName=request.user)
+    if dxach.language == "gu":return redirect("/gu/")
+    if dxach.language == "hi":return redirect("/hi/")
     return render(request ,'page/index.html',date)
 
 def newsviews(request,slug):
+        
         if chickingvalue(request) == False: return redirect('user/login/')
         UserInfodb = UserInfo.objects.all()
         newsdb = News.objects.get(slug=slug)
@@ -135,7 +142,28 @@ def newsviews(request,slug):
            return redirect("/comment/"+str(comment)+"/"+str(newsdb.id))
         newsdb2 = News.objects.all().filter(onlyvideo=False,ManagersPermission=True,EditorsPermission=True,WritersPermission=True,JournalistsPermission=True)
         five_unique_elements = random.choices(newsdb2,k=20)
+        dxach = UserInfo.objects.get(UserName=request.user)
+        
+        newsallhi = News_hindi.objects.all().filter(News__Journalists = newsdb.Journalists)
+        newsallgu = News_gujarati.objects.all().filter(News__Journalists = newsdb.Journalists)
+        
+        newshi2 = random.choices(News_hindi.objects.all().filter(News__onlyvideo =False),k=20)
+        newsgu2 = random.choices(News_gujarati.objects.all().filter(News__onlyvideo =False),k=20)
+        
+        try:
+            hi_db = News_hindi.objects.get(News=newsdb)
+            gu_db = News_gujarati.objects.get(News=newsdb)
+        except:
+            hi_db ,gu_db =""
+        
         date ={
+            "newshi2":newshi2,
+            "newsgu2":newsgu2,
+            "newsallgu":newsallgu,
+            "newsallhi":newsallhi,
+            "gu_db":gu_db,
+            "hi_db":hi_db,
+            "dxach":dxach,
             'newsdb':newsdb,
             'staffdb':staffdb,
             'TrendingTopicdb':TrendingTopicdb,
@@ -189,11 +217,17 @@ def topicviews(request,NewsTopic):
     return render(request ,'page/topicniews.html',date)
 
 
+
 def profile(request):
     if chickingvalue(request) == False: return redirect('user/login/')
     userinfo = UserInfo.objects.get(UserName=request.user)
     dbform = UserInfoForm(request.POST, request.FILES, instance=userinfo)
+    language = request.POST.get("language")
+   
     if request.method == 'POST':
+        language = request.POST.get("language")
+        userinfo.language = language
+        userinfo.save()
         dbform = UserInfoForm(request.POST, request.FILES, instance=userinfo)
         if dbform.is_valid():
             dbform.save()
@@ -746,5 +780,93 @@ def about_us(request):
 
 def ContactUs(request):
     return redirect("/")
+
+
+            
+def translate_hi(request):
+           
+    if chickingvalue(request) == False: return redirect('user/login/')
+    newsdb = News.objects.all().filter(ManagersPermission=True,onlyvideo=False)[::-1]
+    newsdb2 = News.objects.all().filter(ManagersPermission=True,onlyvideo=True)[::-1]
+    TrendingTopicdb = TrendingTopic.objects.all()[::-1]
+    alltopic = Topic.objects.all()[::-1]
+    async def main() -> None:
+      async with python_weather.Client(unit=python_weather.IMPERIAL) as client:
     
+        weather = await client.get('Surat, Gujarat')
+        return {
+        "temperature":weather.temperature,
+        "humidity":weather.humidity,
+        "feels_like":weather.feels_like,
+        "description":weather.description,
+        "datetime":weather.datetime,
+        }
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+  
+    qrow  = asyncio.run(main())
+    Hindidb = News_hindi.objects.all().filter(News__onlyvideo=False)
+    HindidbVIDE = News_hindi.objects.all().filter(News__onlyvideo=True)
     
+    date ={
+        'newsdb':newsdb,
+        'TrendingTopicdb':TrendingTopicdb,
+        "alltopic":alltopic,
+        "newsdb2":newsdb2,
+        "temperature":qrow["temperature"],
+        "humidity":qrow["humidity"],
+        "feels_like":qrow["feels_like"],
+        "description":qrow["description"],
+        "datetime":qrow["datetime"],
+        "Hindidb":Hindidb,
+        "HindidbVIDE":HindidbVIDE,
+        
+    }
+    dxach = UserInfo.objects.get(UserName=request.user)
+    if dxach.language == "gu":return redirect("/gu/")
+    if dxach.language == "en":return redirect("/")
+
+    return render(request ,'page/translate.html',date)
+
+def translate_gu(request):
+           
+    if chickingvalue(request) == False: return redirect('user/login/')
+    newsdb = News.objects.all().filter(ManagersPermission=True,onlyvideo=False)[::-1]
+    newsdb2 = News.objects.all().filter(ManagersPermission=True,onlyvideo=True)[::-1]
+    TrendingTopicdb = TrendingTopic.objects.all()[::-1]
+    alltopic = Topic.objects.all()[::-1]
+    async def main() -> None:
+      async with python_weather.Client(unit=python_weather.IMPERIAL) as client:
+    
+        weather = await client.get('Surat, Gujarat')
+        return {
+        "temperature":weather.temperature,
+        "humidity":weather.humidity,
+        "feels_like":weather.feels_like,
+        "description":weather.description,
+        "datetime":weather.datetime,
+        }
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+  
+    qrow  = asyncio.run(main())
+    Hindidb = News_gujarati.objects.all().filter(News__onlyvideo=False)
+    HindidbVIDE = News_gujarati.objects.all().filter(News__onlyvideo=True)
+    
+    dxach = UserInfo.objects.get(UserName=request.user)
+    if dxach.language == "hi":return redirect("/hi/")
+    if dxach.language == "en":return redirect("/")
+    
+    date ={
+        'newsdb':newsdb,
+        'TrendingTopicdb':TrendingTopicdb,
+        "alltopic":alltopic,
+        "newsdb2":newsdb2,
+        "temperature":qrow["temperature"],
+        "humidity":qrow["humidity"],
+        "feels_like":qrow["feels_like"],
+        "description":qrow["description"],
+        "datetime":qrow["datetime"],
+        "Hindidb":Hindidb,
+        "HindidbVIDE":HindidbVIDE,
+        
+    }
+    return render(request ,'page/translate.html',date)

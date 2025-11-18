@@ -31,7 +31,10 @@ urlpatterns = [
    path('StaffAll/', views.StaffAll , name='StaffAll' ),
    path('Staffadd/', views.Staffadd , name='Staffadd' ),
    path("creatStaff/", views.Staffcreate , name="Staffcreate" ),
-   path("creatStaff/<pk>", views.Staffcreate2 , name="Staffcreate2" )
+   path("creatStaff/<pk>", views.Staffcreate2 , name="Staffcreate2" ),
+   path("Trendingtopics",views.Trending_topics , name="Trendingtopics"),
+   path("wdknqwd/<id>",views.wdknqwd ),
+   path("CtreateTrendingToicsDB/",views.createtrtop ),
    
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -31,6 +31,8 @@ urlpatterns = [
    path('Gujarati/<id>/<title>', views.Gujarati ),
    path("aboutus/", views.about_us , name="aboutus"),
    path("ContactUs/", views.ContactUs , name="ContactUs"),
+   path("hi/",views.translate_hi),
+   path("gu/",views.translate_gu),
    
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

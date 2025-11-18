@@ -35,6 +35,7 @@ def RegistrationUser(request):
         ganders = request.POST.get("Ganders")
         latitude = request.POST.get("latitude")
         longitude = request.POST.get("longitude")
+        language = request.POST.get("language")
         location = geolocator.reverse((latitude, longitude))
         if userform.is_valid():
             users = userform.save(commit=False)
@@ -42,9 +43,9 @@ def RegistrationUser(request):
             users.save()
             login(request, users)
             try:
-                userinfoform = UserInfo(UserName=request.user,Ganders=ganders,address=location.address)
+                userinfoform = UserInfo(UserName=request.user,Ganders=ganders,address=location.address,language=language)
             except:
-                userinfoform = UserInfo(UserName=request.user,Ganders=ganders,address="")
+                userinfoform = UserInfo(UserName=request.user,Ganders=ganders,address="",language=language)
             userinfoform.save()
             try:
                 userq1 = User.objects.get(username=request.user)
