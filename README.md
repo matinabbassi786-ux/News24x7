@@ -1,26 +1,5 @@
 
 
-<!-- 
-from bs4 import BeautifulSoup
-from googletrans import Translator
-
-
-text = '''
-<P> 'Killed because they are Alawites': Fear among Syria's minorities after the fall of Assad
-<img sdw > </p>
- <p>The killer came by night – a masked man on a motorbike who struck without warning and then sped away. It's become a familiar pattern in some corners of the new Syria in recent months, as the country's fragile unity is eroded by revenge attacks and sectarian killings.</p>
-'''
-soup = BeautifulSoup(text, 'html.parser')
-translator = Translator()
-translator = Translator()
-for x in soup.get_text().splitlines():
-    try:
-        translation = translator.translate(str(x), src='en', dest='gu')
-        print(x)
-        print(translation.text)
-    except:pass
--->
-
 # News24x7
  This website has been specially created as part of a project to showcase how news can be shared online in a simple, interactive, and user-friendly way. While it is not a commercial platform, it is designed with all the important features of a modern news website.
 
