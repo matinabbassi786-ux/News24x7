@@ -16,7 +16,7 @@
 - **Comments on News:** – Share your opinions and join discussions with other readers.
 - **Report News:**– Help improve the platform by reporting false or inappropriate content.
 
-  # Why News 24x7?
+# Why News 24x7?
 - **📰 Simple & Clean Design:**– Easy to navigate for all users.
 -  **Accessible in Multiple Languages**– Reaching audiences in both Hindi and Gujarati.
  -  **Interactive Experience**– Go beyond reading – bookmark, follow, like, and comment.
