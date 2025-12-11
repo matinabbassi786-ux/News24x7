@@ -5,7 +5,6 @@
 - Developed by: **Matin**
 - Content written by: **Pravinbhai**
 - Documentation by: **Utkarsh**
-- Email: **news24x7wabsit@gmail.com**
 
 **News 24x7** is built as an educational and experimental project. The idea is to give users an experience similar to a real-world news portal – where they can explore, engage, and interact with the latest stories.
 # Key Features
