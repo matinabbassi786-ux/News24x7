@@ -4,7 +4,7 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-w*h1e=%)kgktk3&i436ke5pdf8_&l&bns#7&)u6j=pg&r_p8zo'
+SECRET_KEY = ''
 
 DEBUG = True
 
@@ -73,7 +73,7 @@ DATABASES = {
     'HOST': '127.0.0.1',
     'PORT': '3306',
     'USER': 'root',
-    'PASSWORD':'gj09bm1947',
+    'PASSWORD':'',
     
 }
 }
@@ -106,13 +106,13 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# news24x7wabsit@gmail.com
+
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'news24x7wabsit@gmail.com'
-EMAIL_HOST_PASSWORD = 'ffcj jylq divt gzwd'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # STATIC_ROOT ="static/"
